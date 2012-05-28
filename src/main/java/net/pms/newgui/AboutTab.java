@@ -64,7 +64,7 @@ public class AboutTab {
 	public JComponent build() {
 		FormLayout layout = new FormLayout(
 			"0:grow, pref, 0:grow",
-			"pref, 3dlu, pref, 3dlu, pref, 12dlu, pref, 3dlu, pref, 3dlu, pref, 3dlu, pref, 3dlu, pref, 3dlu, p, 3dlu, p");
+			"pref, 3dlu, pref, 3dlu, pref, 12dlu, pref, 3dlu, pref, 3dlu, pref, 3dlu, pref, 3dlu, pref, 3dlu, pref, 3dlu, p, 3dlu, p");
 
 		PanelBuilder builder = new PanelBuilder(layout);
 		builder.setDefaultDialogBorder();
@@ -74,7 +74,7 @@ public class AboutTab {
 		String projectName = PropertiesUtil.getProjectProperties().get("project.name");
 
 		final LinkMouseListener pms3Link = new LinkMouseListener(projectName + " " + PMS.getVersion(),
-			"http://www.ps3mediaserver.org/");
+			"http://www.universalmediaserver.com/");
 		JLabel lPms3Link = builder.addLabel(pms3Link.getLabel(), cc.xy(2, 1, "center, fill"));
 		lPms3Link.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		lPms3Link.addMouseListener(pms3Link);
@@ -83,8 +83,8 @@ public class AboutTab {
 		String commitId = PropertiesUtil.getProjectProperties().get("git.commit.id");
 		String commitTime = PropertiesUtil.getProjectProperties().get("git.commit.time");
 		String shortCommitId = commitId.substring(0,  9);
-		String commitUrl = "https://github.com/ps3mediaserver/ps3mediaserver/commit/" + commitId;
-		String buildLabel = Messages.getString("LinksTab.6") + " " + shortCommitId + " (" + commitTime + ")";
+		String commitUrl = "http://code.google.com/p/universal-media-server/source/detail?r=" + commitId;
+		String buildLabel = Messages.getString("LinksTab.6") + " " + commitTime;
 
 		final LinkMouseListener commitLink = new LinkMouseListener(buildLabel, commitUrl);
 		JLabel lCommitLink = builder.addLabel(commitLink.getLabel(), cc.xy(2, 3, "center, fill"));
@@ -97,39 +97,45 @@ public class AboutTab {
 
 		builder.addLabel(Messages.getString("LinksTab.5"), cc.xy(2, 7, "center, fill"));
 
+		final LinkMouseListener ps3msLink = new LinkMouseListener("PS3 Media Server",
+			"http://www.ps3mediaserver.org/");
+		JLabel lPs3msLink = builder.addLabel(ps3msLink.getLabel(), cc.xy(2, 9, "center, fill"));
+		lPs3msLink.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		lPs3msLink.addMouseListener(ps3msLink);
+
 		final LinkMouseListener ffmpegLink = new LinkMouseListener("FFmpeg",
 			"http://ffmpeg.mplayerhq.hu");
-		JLabel lFfmpegLink = builder.addLabel(ffmpegLink.getLabel(), cc.xy(2, 9, "center, fill"));
+		JLabel lFfmpegLink = builder.addLabel(ffmpegLink.getLabel(), cc.xy(2, 11, "center, fill"));
 		lFfmpegLink.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		lFfmpegLink.addMouseListener(ffmpegLink);
 
 		final LinkMouseListener mplayerLink = new LinkMouseListener("MPlayer",
 			"http://www.mplayerhq.hu");
-		JLabel lMplayerLink = builder.addLabel(mplayerLink.getLabel(), cc.xy(2, 11, "center, fill"));
+		JLabel lMplayerLink = builder.addLabel(mplayerLink.getLabel(), cc.xy(2, 13, "center, fill"));
 		lMplayerLink.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		lMplayerLink.addMouseListener(mplayerLink);
 
 		final LinkMouseListener mplayerSubJunkBuildsLink = new LinkMouseListener("SubJunk's MPlayer builds and InterFrame",
 			"http://www.spirton.com/mplayer-mencoder-subjunk-build/");
-		JLabel lMplayerSubJunkBuildsLink = builder.addLabel(mplayerSubJunkBuildsLink.getLabel(), cc.xy(2, 13, "center, fill"));
+		JLabel lMplayerSubJunkBuildsLink = builder.addLabel(mplayerSubJunkBuildsLink.getLabel(), cc.xy(2, 15, "center, fill"));
 		lMplayerSubJunkBuildsLink.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		lMplayerSubJunkBuildsLink.addMouseListener(mplayerSubJunkBuildsLink);
 
 		final LinkMouseListener imageMagickLink = new LinkMouseListener("ImageMagick",
 			"http://www.imagemagick.org");
-		JLabel lImageMagickLink = builder.addLabel(imageMagickLink.getLabel(), cc.xy(2, 15, "center, fill"));
+		JLabel lImageMagickLink = builder.addLabel(imageMagickLink.getLabel(), cc.xy(2, 17, "center, fill"));
 		lImageMagickLink.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		lImageMagickLink.addMouseListener(imageMagickLink);
 
 		final LinkMouseListener mediaInfoLink = new LinkMouseListener("MediaInfo",
 			"http://mediainfo.sourceforge.net/en");
-		JLabel lMediaInfoLink = builder.addLabel(mediaInfoLink.getLabel(), cc.xy(2, 17, "center, fill"));
+		JLabel lMediaInfoLink = builder.addLabel(mediaInfoLink.getLabel(), cc.xy(2, 19, "center, fill"));
 		lMediaInfoLink.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		lMediaInfoLink.addMouseListener(mediaInfoLink);
 
 		final LinkMouseListener avisynthMTLink = new LinkMouseListener("Avisynth MT",
 			"http://forum.doom9.org/showthread.php?t=148782");
-		JLabel lAvisynthMTLink = builder.addLabel(avisynthMTLink.getLabel(), cc.xy(2, 19, "center, fill"));
+		JLabel lAvisynthMTLink = builder.addLabel(avisynthMTLink.getLabel(), cc.xy(2, 21, "center, fill"));
 		lAvisynthMTLink.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		lAvisynthMTLink.addMouseListener(avisynthMTLink);
 
