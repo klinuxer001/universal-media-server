@@ -49,7 +49,7 @@ public class Build {
 	 * @return The profile directory name
 	 */
 
-	private static final String PROFILE_DIRECTORY_NAME = "PMS";
+	private static final String PROFILE_DIRECTORY_NAME = "UMS";
 
 	/**
 	 * Determines whether or not this PMS build can be updated to a more

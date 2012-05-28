@@ -161,7 +161,7 @@ public class BasicSystemUtils implements SystemUtils {
 			popup.add(traceItem);
 			popup.add(defaultItem);
 
-			final TrayIcon trayIcon = new TrayIcon(image, "PS3 Media Server (SubJunk Build)", popup);
+			final TrayIcon trayIcon = new TrayIcon(image, "Universal Media Server", popup);
 
 			trayIcon.setImageAutoSize(true);
 			trayIcon.addActionListener(new ActionListener() {

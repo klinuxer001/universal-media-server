@@ -86,7 +86,7 @@ Section "Program Files"
   WriteUnInstaller "uninst.exe"
 
   ReadENVStr $R0 ALLUSERSPROFILE
-  SetOutPath "$R0\PMS"
+  SetOutPath "$R0\UMS"
   AccessControl::GrantOnFile "$R0\PMS" "(S-1-5-32-545)" "FullAccess"
 SectionEnd
 

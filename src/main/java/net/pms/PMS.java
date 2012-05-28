@@ -333,11 +333,9 @@ public class PMS {
 		frame.setStatusCode(0, Messages.getString("PMS.130"), "connect_no-220.png");
 		proxy = -1;
 
-		logger.info("Starting PS3 Media Server " + getVersion());
-		logger.info("by shagrath / 2008-2012");
-		logger.info("http://ps3mediaserver.org");
-		logger.info("https://github.com/ps3mediaserver/ps3mediaserver");
-		logger.info("Custom build by SubJunk, http://www.spirton.com");
+		logger.info("Starting Universal Media Server " + getVersion());
+		logger.info("Based on PS3 Media Server (ps3mediaserver.org) by shagrath");
+		logger.info("http://www.universalmediaserver.com");
 		logger.info("");
 
 		String commitId = PropertiesUtil.getProjectProperties().get("git.commit.id");

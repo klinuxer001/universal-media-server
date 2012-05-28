@@ -2068,7 +2068,7 @@ public class PmsConfiguration {
 	}
 
 	public boolean getHideTranscodeEnabled() {
-		return getBoolean(KEY_HIDE_TRANSCODE_FOLDER, true);
+		return getBoolean(KEY_HIDE_TRANSCODE_FOLDER, false);
 	}
 
 	public void setHideTranscodeEnabled(boolean value) {

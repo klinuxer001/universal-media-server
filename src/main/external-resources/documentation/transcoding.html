@@ -26,10 +26,10 @@
 	<h1>Transcoding settings</h1>
 
 	<p>The "Transcoding settings" tab allows you to specify how content
-		will be transcoded. PMS uses external programs to transcode and stream
+		will be transcoded. UMS uses external programs to transcode and stream
 		content to your device. Some of these programs overlap in what kind of
 		media they can transcode. On this tab you can specify which order of
-		preference the programs have when PMS determines how to transcode
+		preference the programs have when UMS determines how to transcode
 		media. For each media type there is a list of programs, sorted by
 		preference. The topmost program is most likely to be used. If it
 		cannot transcode the media, the next program on the list is used, and
@@ -54,7 +54,7 @@
 			the free tool CPU-z on Windows systems. On Linux have a look at the virtual
 			proc-filesystem. In the file /proc/cpuinfo you will find more details
 			about your CPU. You also get much information about CPUs from AMD and
-			Intel from their Wikipedia-articles. Regardless, PMS should be able to
+			Intel from their Wikipedia-articles. Regardless, UMS should be able to
 			detect and set the correct amount of cores.</dd>
 
 		<dt>Chapters # Transcode # folder support / interval in minutes</dt>
@@ -108,7 +108,7 @@
 			engine.</dd>
 
 		<dt>Mpeg2 Video quality settings (dropdown)</dt>
-		<dd>If PMS is not able to stream directly or mux the audio/video
+		<dd>If UMS is not able to stream directly or mux the audio/video
 			to a PS3 compatible container it will transcode to MPEG2, which is PS3
 			compatible. This costs lots of CPU power. This also will increase the
 			network traffic because MPEG2 compression is not very good for HD
@@ -169,7 +169,7 @@
 
 		<dt>Switch to tsMuxeR when video when H264 video is PS3
 			compatible</dt>
-		<dd>Enable this! When MEncoder transcoding engine is used and PMS
+		<dd>Enable this! When MEncoder transcoding engine is used and UMS
 			recognizes a PS3 compatible video it will switch to transcoding
 			engine tsMuxeR. The video will then be streamed directly or muxed but
 			not transcoded! This setting will dramatically reduce the need of
@@ -187,7 +187,7 @@
 		<dd>Add specific commandline options for the external program MEncoder</dd>
 
 		<dt>Audio language prority</dt>
-		<dd>Fill in the abbreviation of your native language so that PMS
+		<dd>Fill in the abbreviation of your native language so that UMS
 			will automatically select the right audio track.</dd>
 
 		</dl>
@@ -195,7 +195,7 @@
 		<h3>Subtitle settings</h3>
 		<dl>
 		<dt>Subtitles language priority</dt>
-		<dd>Fill in the abbreviation of your native language so that PMS
+		<dd>Fill in the abbreviation of your native language so that UMS
 			will automatically select the right subtitle.</dd>
 
 		<dt>Audio/subtitles language priority</dt>
@@ -259,9 +259,9 @@
 		<dt>Alternative FFmpeg path</dt>
 		<dd>This feature is for users of Microsoft Windows Mediacenter
 			Edition. If you have recorded some TV shows and want to watch the
-			DVR-MS files with PMS/PS3 you need a special version of FFmpeg.
-			Download and unzip this file in your PMS installation directory and
-			restart PMS.</dd>
+			DVR-MS files with UMS/PS3 you need a special version of FFmpeg.
+			Download and unzip this file in your UMS installation directory and
+			restart UMS.</dd>
 	</dl>
 
 

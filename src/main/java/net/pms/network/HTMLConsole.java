@@ -25,7 +25,7 @@ import net.pms.dlna.DLNAMediaDatabase;
 public class HTMLConsole {
 	public static String servePage(String resource) {
 		StringBuilder sb = new StringBuilder();
-		sb.append("<html><head><title>PS3 Media Server HTML Console</title></head><body>");
+		sb.append("<html><head><title>Universal Media Server HTML Console</title></head><body>");
 
 		DLNAMediaDatabase database = PMS.get().getDatabase();
 		PmsConfiguration configuration = PMS.getConfiguration();
@@ -48,7 +48,7 @@ public class HTMLConsole {
 			sb.append("<p align=center><b>Scan stopped!</b></p><br>");
 		}
 
-		sb.append("<p align=center><img src='/images/thumbnail-256.png'><br>PS3 Media Server HTML console<br><br>Menu:<br>");
+		sb.append("<p align=center><img src='/images/thumbnail-256.png'><br>Universal Media Server HTML console<br><br>Menu:<br>");
 		sb.append("<a href=\"home\">Home</a><br>");
 		sb.append("<a href=\"scan\">Scan folders</a><br>");
 		sb.append("<a href=\"compact\">Shrink cache database (not recommended)</a>");

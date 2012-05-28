@@ -163,7 +163,7 @@ public class HTTPResource {
 		ByteArrayOutputStream bytes = new ByteArrayOutputStream();
 		URLConnection conn = url.openConnection();
 		// GameTrailers blocks user-agents that identify themselves as "Java"
-		conn.setRequestProperty("User-agent", "PS3 Media Server " + PMS.getVersion());
+		conn.setRequestProperty("User-agent", "Universal Media Server " + PMS.getVersion());
 		InputStream in = conn.getInputStream();
 		FileOutputStream fOUT = null;
 		if (saveOnDisk && f != null) {
