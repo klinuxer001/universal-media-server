@@ -333,7 +333,7 @@ public class PMS {
 		frame.setStatusCode(0, Messages.getString("PMS.130"), "connect_no-220.png");
 		proxy = -1;
 
-		logger.info("Starting Universal Media Server " + getVersion());
+		logger.info("Starting " + PropertiesUtil.getProjectProperties().get("project.name") + " " + getVersion());
 		logger.info("Based on PS3 Media Server (ps3mediaserver.org) by shagrath");
 		logger.info("http://www.universalmediaserver.com");
 		logger.info("");

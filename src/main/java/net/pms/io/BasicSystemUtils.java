@@ -37,6 +37,7 @@ import java.net.URISyntaxException;
 import net.pms.Messages;
 import net.pms.PMS;
 import net.pms.newgui.LooksFrame;
+import net.pms.util.PropertiesUtil;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -161,7 +162,7 @@ public class BasicSystemUtils implements SystemUtils {
 			popup.add(traceItem);
 			popup.add(defaultItem);
 
-			final TrayIcon trayIcon = new TrayIcon(image, "Universal Media Server", popup);
+			final TrayIcon trayIcon = new TrayIcon(image, PropertiesUtil.getProjectProperties().get("project.name"), popup);
 
 			trayIcon.setImageAutoSize(true);
 			trayIcon.addActionListener(new ActionListener() {
