@@ -764,7 +764,7 @@ public class PMS {
 				}
 			}
 
-			logger.info("Using the following UUID configured in PMS.conf: " + uuid);
+			logger.info("Using the following UUID configured in UMS.conf: " + uuid);
 		}
 		return "uuid:" + uuid;
 	}

@@ -48,7 +48,7 @@ import com.sun.jna.Platform;
 
 /**
  * Container for all configurable PMS settings. Settings are typically defined by three things:
- * a unique key for use in the configuration file "PMS.conf", a getter (and setter) method and
+ * a unique key for use in the configuration file "UMS.conf", a getter (and setter) method and
  * a default value. When a key cannot be found in the current configuration, the getter will
  * return a default value. Setters only store a value, they do not permanently save it to
  * file.
@@ -230,7 +230,7 @@ public class PmsConfiguration {
 
 	/*
 		The following code enables a single setting - PMS_PROFILE - to be used to
-		initialize PROFILE_PATH i.e. the path to the current session's profile (AKA PMS.conf).
+		initialize PROFILE_PATH i.e. the path to the current session's profile (AKA UMS.conf).
 		It also initializes PROFILE_DIRECTORY - i.e. the directory the profile is located in -
 		which is needed for configuration-by-convention detection of WEB.conf (anything else?).
 
@@ -244,7 +244,7 @@ public class PmsConfiguration {
 		under multiple profiles without fiddling with environment variables, properties or
 		command-line arguments.
 
-		1) if PMS_PROFILE is not set, PMS.conf is located in: 
+		1) if PMS_PROFILE is not set, UMS.conf is located in: 
 
 			Windows:             %ALLUSERSPROFILE%\$build
 			Mac OS X:            $HOME/Library/Application Support/$build
@@ -255,28 +255,28 @@ public class PmsConfiguration {
 		"PMS Rendr Edition" or "pms-mlx".
 
 		2) if a relative or absolute *directory path* is supplied (the directory must exist),
-		it is used as the profile directory and the profile is located there under the default profile name (PMS.conf):
+		it is used as the profile directory and the profile is located there under the default profile name (UMS.conf):
 
 			PMS_PROFILE = /absolute/path/to/dir
 			PMS_PROFILE = relative/path/to/dir # relative to the working directory
 
-		Amongst other things, this can be used to restore the legacy behaviour of locating PMS.conf in the current
+		Amongst other things, this can be used to restore the legacy behaviour of locating UMS.conf in the current
 		working directory e.g.:
 
-			PMS_PROFILE=. ./PMS.sh
+			PMS_PROFILE=. ./UMS.sh
 
 		3) if a relative or absolute *file path* is supplied (the file doesn't have to exist),
 		it is taken to be the profile, and its parent dir is taken to be the profile (i.e. config file) dir: 
 
-			PMS_PROFILE = PMS.conf            # profile dir = .
+			PMS_PROFILE = UMS.conf            # profile dir = .
 			PMS_PROFILE = folder/dev.conf     # profile dir = folder
 			PMS_PROFILE = /path/to/some.file  # profile dir = /path/to/
 	 */
-	private static final String DEFAULT_PROFILE_FILENAME = "PMS.conf";
+	private static final String DEFAULT_PROFILE_FILENAME = "UMS.conf";
 	private static final String ENV_PROFILE_PATH = "PMS_PROFILE";
 	private static final String PROFILE_DIRECTORY; // path to directory containing PMS config files
-	private static final String PROFILE_PATH; // abs path to profile file e.g. /path/to/PMS.conf
-    private static final String SKEL_PROFILE_PATH ; // abs path to skel (default) profile file e.g. /etc/skel/.config/ps3mediaserver/PMS.conf
+	private static final String PROFILE_PATH; // abs path to profile file e.g. /path/to/UMS.conf
+    private static final String SKEL_PROFILE_PATH ; // abs path to skel (default) profile file e.g. /etc/skel/.config/ps3mediaserver/UMS.conf
                                                     // "project.skelprofile.dir" project property
 	private static final String PROPERTY_PROFILE_PATH = "pms.profile.path";
 

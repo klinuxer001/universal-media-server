@@ -20,17 +20,17 @@
 			<outputDirectory>.</outputDirectory>
 			<fileMode>0644</fileMode>
 			<includes>
-				<include>pms.jar</include>
+				<include>ums.jar</include>
 			</includes>
 		</fileSet>
 
 		<!-- Include the tsMuxeR binary -->
 		<fileSet>
-			<directory>${project.binaries}</directory>
-			<outputDirectory>linux</outputDirectory>
+			<directory>${project.external-resources}</directory>
+			<outputDirectory>.</outputDirectory>
 			<fileMode>0755</fileMode>
 			<includes>
-				<include>tsMuxeR</include>
+				<include>linux/tsMuxeR</include>
 			</includes>
 		</fileSet>
 
@@ -41,7 +41,7 @@
 			<fileMode>0755</fileMode>
 			<lineEnding>unix</lineEnding>
 			<includes>
-				<include>PMS.sh</include>
+				<include>UMS.sh</include>
 			</includes>
 		</fileSet>
 
@@ -52,7 +52,7 @@
 			<fileMode>0644</fileMode>
 			<lineEnding>unix</lineEnding>
 			<includes>
-				<include>README.md</include>
+				<include>README.txt</include>
 				<include>CHANGELOG.txt</include>
 				<include>LICENSE.txt</include>
 			</includes>
@@ -65,7 +65,7 @@
 			<fileMode>0644</fileMode>
 			<lineEnding>unix</lineEnding>
 			<includes>
-				<include>PMS.conf</include>
+				<include>UMS.conf</include>
 				<include>WEB.conf</include>
 				<include>logback.headless.xml</include>
 				<include>logback.xml</include>

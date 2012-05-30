@@ -19,7 +19,7 @@ VIAddVersionKey "FileDescription" "${PROJECT_NAME}"
 VIAddVersionKey "FileVersion" "${PROJECT_VERSION}"
 VIProductVersion "${PROJECT_VERSION_SHORT}.0"
  
-!define JARPATH "${PROJECT_BUILD_DIR}\pms.jar"
+!define JARPATH "${PROJECT_BUILD_DIR}\ums.jar"
 !define CLASS "net.pms.PMS"
 !define PRODUCT_NAME "PMS"
  
@@ -51,7 +51,7 @@ Section ""
  
   ; change for your purpose (-jar etc.)
   ${GetParameters} $1
-  StrCpy $0 '"$R0" -classpath update.jar;pms.jar -Xmx768M -Djava.net.preferIPv4Stack=true -Dfile.encoding=UTF-8 ${CLASS} $1'
+  StrCpy $0 '"$R0" -classpath update.jar;ums.jar -Xmx768M -Djava.net.preferIPv4Stack=true -Dfile.encoding=UTF-8 ${CLASS} $1'
  
   SetOutPath $EXEDIR
   Exec $0

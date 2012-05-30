@@ -20,7 +20,7 @@ SetCompressor /SOLID lzma
 SetCompressorDictSize 32
 
 !define MUI_ABORTWARNING
-!define MUI_FINISHPAGE_RUN "$INSTDIR\PMS.exe"
+!define MUI_FINISHPAGE_RUN "$INSTDIR\UMS.exe"
 !define MUI_WELCOMEFINISHPAGE_BITMAP "${NSISDIR}\Contrib\Graphics\Wizard\win.bmp"
 
 !define MUI_FINISHPAGE_SHOWREADME ""
@@ -39,7 +39,7 @@ SetCompressorDictSize 32
 ShowUninstDetails show
 
 Function CreateDesktopShortcut
-  CreateShortCut "$DESKTOP\${PROJECT_NAME}.lnk" "$INSTDIR\PMS.exe"
+  CreateShortCut "$DESKTOP\${PROJECT_NAME}.lnk" "$INSTDIR\UMS.exe"
 FunctionEnd
 
 Section "Program Files"
@@ -49,13 +49,13 @@ Section "Program Files"
   File /r "${PROJECT_BASEDIR}\src\main\external-resources\documentation"
   File /r "${PROJECT_BASEDIR}\src\main\external-resources\renderers"
   File /r "${PROJECT_BINARIES}\win32"
-  File "${PROJECT_BUILD_DIR}\PMS.exe"
-  File "${PROJECT_BASEDIR}\src\main\external-resources\PMS.bat"
-  File "${PROJECT_BUILD_DIR}\pms.jar"
+  File "${PROJECT_BUILD_DIR}\UMS.exe"
+  File "${PROJECT_BASEDIR}\src\main\external-resources\UMS.bat"
+  File "${PROJECT_BUILD_DIR}\ums.jar"
   File "${PROJECT_BINARIES}\MediaInfo.dll"
   File "${PROJECT_BINARIES}\MediaInfo64.dll"
   File "${PROJECT_BASEDIR}\CHANGELOG.txt"
-  File "${PROJECT_BASEDIR}\README.md"
+  File "${PROJECT_BASEDIR}\README.txt"
   File "${PROJECT_BASEDIR}\LICENSE.txt"
   File "${PROJECT_BASEDIR}\src\main\external-resources\logback.xml"
   File "${PROJECT_BASEDIR}\src\main\external-resources\icon.ico"
@@ -92,8 +92,8 @@ SectionEnd
 Section "Start Menu Shortcuts"
   SetShellVarContext all
   CreateDirectory "$SMPROGRAMS\${PROJECT_NAME}"
-  CreateShortCut "$SMPROGRAMS\${PROJECT_NAME}\${PROJECT_NAME}.lnk" "$INSTDIR\PMS.exe" "" "$INSTDIR\PMS.exe" 0
-  CreateShortCut "$SMPROGRAMS\${PROJECT_NAME}\${PROJECT_NAME} (Select Profile).lnk" "$INSTDIR\PMS.exe" "profiles" "$INSTDIR\PMS.exe" 0
+  CreateShortCut "$SMPROGRAMS\${PROJECT_NAME}\${PROJECT_NAME}.lnk" "$INSTDIR\UMS.exe" "" "$INSTDIR\UMS.exe" 0
+  CreateShortCut "$SMPROGRAMS\${PROJECT_NAME}\${PROJECT_NAME} (Select Profile).lnk" "$INSTDIR\UMS.exe" "profiles" "$INSTDIR\UMS.exe" 0
   CreateShortCut "$SMPROGRAMS\${PROJECT_NAME}\Uninstall.lnk" "$INSTDIR\uninst.exe" "" "$INSTDIR\uninst.exe" 0
 SectionEnd
 
@@ -105,14 +105,14 @@ Section "Uninstall"
   RMDir /R /REBOOTOK "$INSTDIR\renderers"
   RMDir /R /REBOOTOK "$INSTDIR\documentation"
   RMDir /R /REBOOTOK "$INSTDIR\win32"
-  Delete /REBOOTOK "$INSTDIR\PMS.exe"
-  Delete /REBOOTOK "$INSTDIR\PMS.bat"
-  Delete /REBOOTOK "$INSTDIR\pms.jar"
+  Delete /REBOOTOK "$INSTDIR\UMS.exe"
+  Delete /REBOOTOK "$INSTDIR\UMS.bat"
+  Delete /REBOOTOK "$INSTDIR\ums.jar"
   Delete /REBOOTOK "$INSTDIR\MediaInfo.dll"
   Delete /REBOOTOK "$INSTDIR\MediaInfo64.dll"
   Delete /REBOOTOK "$INSTDIR\CHANGELOG.txt"
   Delete /REBOOTOK "$INSTDIR\WEB.conf"
-  Delete /REBOOTOK "$INSTDIR\README.md"
+  Delete /REBOOTOK "$INSTDIR\README.txt"
   Delete /REBOOTOK "$INSTDIR\LICENSE.txt"
   Delete /REBOOTOK "$INSTDIR\debug.log"
   Delete /REBOOTOK "$INSTDIR\logback.xml"

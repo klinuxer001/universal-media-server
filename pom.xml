@@ -28,7 +28,7 @@
 
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>net.pms</groupId>
-	<artifactId>pms</artifactId>
+	<artifactId>ums</artifactId>
 	<name>Universal Media Server</name>
 	<packaging>jar</packaging>
 	<version>1.0</version>
@@ -957,7 +957,7 @@
 									<target>
 										<!-- Copy the pms-x.x.x-jar-with-dependencies.jar to pms.jar -->
 										<copy file="${project.basedir}/target/${project.artifactId}-${project.version}-jar-with-dependencies.jar"
-											tofile="${project.basedir}/target/pms.jar" overwrite="true" />
+											tofile="${project.basedir}/target/ums.jar" overwrite="true" />
 
 										<!-- MediaInfo library needs to be in the standard library path to be found -->
 										<copy file="${project.binaries}/MediaInfo.dll" todir="${project.basedir}" />
@@ -983,7 +983,7 @@
 								<id>build-pms-windows</id>
 								<configuration>
 									<makensisBin>${project.external-resources}/third-party/nsis/makensis.exe</makensisBin>
-									<outputFile>${project.build.directory}/PMS.exe</outputFile>
+									<outputFile>${project.build.directory}/UMS.exe</outputFile>
 									<setupScript>${project.external-resources}/nsis/pms.nsi</setupScript>
 								</configuration>
 								<phase>package</phase>
@@ -1058,7 +1058,7 @@
 								<configuration>
 									<target>
 										<copy file="${project.basedir}/target/${project.artifactId}-${project.version}-jar-with-dependencies.jar"
-											tofile="${project.basedir}/target/pms.jar" overwrite="true" />
+											tofile="${project.basedir}/target/ums.jar" overwrite="true" />
 									</target>
 								</configuration>
 							</execution>
