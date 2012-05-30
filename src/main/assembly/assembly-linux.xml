@@ -53,8 +53,7 @@
 			<lineEnding>unix</lineEnding>
 			<includes>
 				<include>README.md</include>
-				<include>CHANGELOG</include>
-				<include>CHANGELOG-SB.txt</include>
+				<include>CHANGELOG.txt</include>
 				<include>LICENSE.txt</include>
 			</includes>
 		</fileSet>
