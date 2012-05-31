@@ -1,26 +1,32 @@
-﻿1.0 - 2012-??-??
+﻿1.0 - 2012-05-31
 
 	Renamed and rebranded to Universal Media Server
 	Updated MPlayer and MEncoder to SB34
+	Updated MediaInfo to 0.7.57
+	Enabled automatic updating
 	Fixed NPE when toggling HTTP Engine V2
 	Fixed global custom MEncoder options
-	Fixed startup for symlinked PMS.sh (thanks, Matthijs!)
-	Added documentation to PMS.conf (thanks, Hagar!)
+	Fixed startup for symlinked UMS.sh (thanks, Matthijs!)
+	Added documentation to UMS.conf (thanks, Hagar!)
 	Updated JNA to support multiarch directories on Linux
 	Added GUI support for right-to-left languages
 	Language updates:
-		- added Arabic
-		- added Hebrew (thanks, zvi-yamin!)
+		- Added Arabic
+		- Updated Czech
+		- Added Hebrew (thanks, zvi-yamin!)
+		- Updated English
+	Renderer updates:
+		- Added D-link DSM-510 (thanks, glenrocks!)
+		- Added AcePlayer app (thanks, md.versi!)
+		- Fixed Samsung 2012 TVs timeout (thanks, troop!)
 	Added option to select and force the default renderer
-	Fixed Samsung 2012 TVs timeout (thanks, troop!)
-	Added support for D-link DSM-510 (thanks, glenrocks!)
-	Added support for AcePlayer app (thanks, md.versi!)
 
 
 ↑ ========================================================== ↑
 ↑      Universal Media Server changelog above this line      ↑
 ↓ PS3 Media Server (SubJunk Build) changelog below this line ↓
 ↓ ========================================================== ↓
+
 
 1.52.2-SB71:
     * Synchronised with official r1330 (43c3455a91), changelog: https://github.com/ps3mediaserver/ps3mediaserver/commits/master
