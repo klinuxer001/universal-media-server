@@ -339,12 +339,6 @@ public class FFMpegVideo extends Player {
 		if (PMS.getConfiguration().getAvisynthMultiThreading()) {
 			Cores = PMS.getConfiguration().getNumberOfCpuCores();
 
-			/*if (Cores == Runtime.getRuntime().availableProcessors()) {
-				// Avisynth stability suffers when using all cores
-				// But not sure if that's still true via MEncoder so more testing should be done
-				Cores = (int) (Cores * 0.8);
-			}*/
-
 			// Goes at the start of the file to initiate multithreading
 			mtLine1 = "SetMemoryMax(512)\nSetMTMode(3," + Cores + ")\n";
 
