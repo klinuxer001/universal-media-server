@@ -164,7 +164,7 @@ public class MediaInfo {
 			if (!Platform.isWindows() && !Platform.isMac()) {
 				LOGGER.info("Make sure you have libmediainfo and libzen installed");
 			}
-			LOGGER.info("The server will now use the less accurate ffmpeg parsing method");
+			LOGGER.info("The server will now use the less accurate FFmpeg parsing method");
 		}
 	}
 
