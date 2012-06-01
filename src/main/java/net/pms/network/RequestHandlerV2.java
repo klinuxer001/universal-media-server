@@ -53,7 +53,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class RequestHandlerV2 extends SimpleChannelUpstreamHandler {
-	private static final Logger logger = LoggerFactory.getLogger(RequestHandlerV2.class);
+	private static final Logger LOGGER = LoggerFactory.getLogger(RequestHandlerV2.class);
+
 	private static final Pattern TIMERANGE_PATTERN =
  Pattern.compile("timeseekrange\\.dlna\\.org\\W*npt\\W*=\\W*([\\d\\.:]+)?\\-?([\\d\\.:]+)?",
 			Pattern.CASE_INSENSITIVE);
@@ -98,11 +99,11 @@ public class RequestHandlerV2 extends SimpleChannelUpstreamHandler {
 		// Apply the IP filter
 		if (filterIp(ia)) {
 			e.getChannel().close();
-			logger.trace("Access denied for address " + ia + " based on IP filter");
+			LOGGER.trace("Access denied for address " + ia + " based on IP filter");
 			return;
 		}
 
-		logger.trace("Opened request handler on socket " + remoteAddress);
+		LOGGER.trace("Opened request handler on socket " + remoteAddress);
 		PMS.get().getRegistry().disableGoToSleep();
 
 		if (HttpMethod.GET.equals(nettyRequest.getMethod())) {
@@ -115,7 +116,7 @@ public class RequestHandlerV2 extends SimpleChannelUpstreamHandler {
 			request = new RequestV2(nettyRequest.getMethod().getName(), nettyRequest.getUri().substring(1));
 		}
 
-		logger.trace("Request: " + nettyRequest.getProtocolVersion().getText() + " : " + request.getMethod() + " : " + request.getArgument());
+		LOGGER.trace("Request: " + nettyRequest.getProtocolVersion().getText() + " : " + request.getMethod() + " : " + request.getArgument());
 
 		if (nettyRequest.getProtocolVersion().getMinorVersion() == 0) {
 			request.setHttp10(true);
@@ -132,12 +133,12 @@ public class RequestHandlerV2 extends SimpleChannelUpstreamHandler {
 		if (renderer != null) {
 			PMS.get().setRendererfound(renderer);
 			request.setMediaRenderer(renderer);
-			logger.trace("Matched media renderer \"" + renderer.getRendererName() + "\" based on address " + ia);
+			LOGGER.trace("Matched media renderer \"" + renderer.getRendererName() + "\" based on address " + ia);
 		}
 		
 		for (String name : nettyRequest.getHeaderNames()) {
 			String headerLine = name + ": " + nettyRequest.getHeader(name);
-			logger.trace("Received on socket: " + headerLine);
+			LOGGER.trace("Received on socket: " + headerLine);
 
 			if (renderer == null && headerLine != null
 					&& headerLine.toUpperCase().startsWith("USER-AGENT")
@@ -151,7 +152,7 @@ public class RequestHandlerV2 extends SimpleChannelUpstreamHandler {
 					request.setMediaRenderer(renderer);
 					renderer.associateIP(ia);	// Associate IP address for later requests
 					PMS.get().setRendererfound(renderer);
-					logger.trace("Matched media renderer \"" + renderer.getRendererName() + "\" based on header \"" + headerLine + "\"");
+					LOGGER.trace("Matched media renderer \"" + renderer.getRendererName() + "\" based on header \"" + headerLine + "\"");
 				}
 			}
 
@@ -163,7 +164,7 @@ public class RequestHandlerV2 extends SimpleChannelUpstreamHandler {
 					request.setMediaRenderer(renderer);
 					renderer.associateIP(ia);	// Associate IP address for later requests
 					PMS.get().setRendererfound(renderer);
-					logger.trace("Matched media renderer \"" + renderer.getRendererName() + "\" based on header \"" + headerLine + "\"");
+					LOGGER.trace("Matched media renderer \"" + renderer.getRendererName() + "\" based on header \"" + headerLine + "\"");
 				}
 			}
 
@@ -222,7 +223,7 @@ public class RequestHandlerV2 extends SimpleChannelUpstreamHandler {
 					}
 				}
 			} catch (Exception ee) {
-				logger.error("Error parsing HTTP headers", ee);
+				LOGGER.error("Error parsing HTTP headers", ee);
 			}
 
 		}
@@ -235,19 +236,19 @@ public class RequestHandlerV2 extends SimpleChannelUpstreamHandler {
 				// the renderer have failed. The only option left is to assume the
 				// default renderer.
 				request.setMediaRenderer(RendererConfiguration.getDefaultConf());
-				logger.trace("Using default media renderer " + request.getMediaRenderer().getRendererName());
+				LOGGER.trace("Using default media renderer " + request.getMediaRenderer().getRendererName());
 
 				if (userAgentString != null && !userAgentString.equals("FDSSDP")) {
 					// We have found an unknown renderer
-					logger.info("Media renderer was not recognized. Possible identifying HTTP headers: User-Agent: " + userAgentString
+					LOGGER.info("Media renderer was not recognized. Possible identifying HTTP headers: User-Agent: " + userAgentString
 							+ ("".equals(unknownHeaders.toString()) ? "" : ", " + unknownHeaders.toString()));
 					PMS.get().setRendererfound(request.getMediaRenderer());
 				}
 			} else {
 				if (userAgentString != null) {
-					logger.trace("HTTP User-Agent: " + userAgentString);
+					LOGGER.trace("HTTP User-Agent: " + userAgentString);
 				}
-				logger.trace("Recognized media renderer " + request.getMediaRenderer().getRendererName());
+				LOGGER.trace("Recognized media renderer " + request.getMediaRenderer().getRendererName());
 			}
 		}
 
@@ -259,7 +260,7 @@ public class RequestHandlerV2 extends SimpleChannelUpstreamHandler {
 		}
 
 		if (request != null) {
-			logger.trace("HTTP: " + request.getArgument() + " / "
+			LOGGER.trace("HTTP: " + request.getArgument() + " / "
 				+ request.getLowRange() + "-" + request.getHighRange());
 		}
 
@@ -302,7 +303,7 @@ public class RequestHandlerV2 extends SimpleChannelUpstreamHandler {
 		try {
 			request.answer(response, e, close, startStopListenerDelegate);
 		} catch (IOException e1) {
-			logger.trace("HTTP request V2 IO error: " + e1.getMessage());
+			LOGGER.trace("HTTP request V2 IO error: " + e1.getMessage());
 			// note: we don't call stop() here in a finally block as
 			// answer() is non-blocking. we only (may) need to call it
 			// here in the case of an exception. it's a no-op if it's
@@ -321,7 +322,7 @@ public class RequestHandlerV2 extends SimpleChannelUpstreamHandler {
 			return;
 		}
 		if (cause != null && !cause.getClass().equals(ClosedChannelException.class) && !cause.getClass().equals(IOException.class)) {
-			logger.debug("Caught exception", cause);
+			LOGGER.debug("Caught exception", cause);
 		}
 		if (ch.isConnected()) {
 			sendError(ctx, HttpResponseStatus.INTERNAL_SERVER_ERROR);
@@ -354,7 +355,7 @@ public class RequestHandlerV2 extends SimpleChannelUpstreamHandler {
 	@Override
 	public void handleUpstream(ChannelHandlerContext ctx, ChannelEvent e) throws Exception {
 	// Log all channel events.
-	logger.trace("Channel upstream event: " + e);
+	LOGGER.trace("Channel upstream event: " + e);
 	super.handleUpstream(ctx, e);
 	}
 	 */
