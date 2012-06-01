@@ -2010,9 +2010,9 @@ public abstract class DLNAResource extends HTTPResource implements Cloneable, Ru
 	}
 
 	/**
-	 * Returns whether or not this resource is handled by Avisynth.
+	 * Returns whether or not this resource is handled by AviSynth.
 	 *
-	 * @return True if handled by Avisynth, otherwise false.
+	 * @return True if handled by AviSynth, otherwise false.
 	 * @since 1.50
 	 */
 	protected boolean isAvisynth() {
@@ -2020,7 +2020,7 @@ public abstract class DLNAResource extends HTTPResource implements Cloneable, Ru
 	}
 
 	/**
-	 * Sets whether or not this resource is handled by Avisynth.
+	 * Sets whether or not this resource is handled by AviSynth.
 	 *
 	 * @param avisynth Set to true if handled by Avisyth, otherwise false.
 	 * @since 1.50

@@ -133,7 +133,7 @@ public class AboutTab {
 		lMediaInfoLink.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		lMediaInfoLink.addMouseListener(mediaInfoLink);
 
-		final LinkMouseListener avisynthMTLink = new LinkMouseListener("Avisynth MT",
+		final LinkMouseListener avisynthMTLink = new LinkMouseListener("AviSynth MT",
 			"http://forum.doom9.org/showthread.php?t=148782");
 		JLabel lAvisynthMTLink = builder.addLabel(avisynthMTLink.getLabel(), cc.xy(2, 21, "center, fill"));
 		lAvisynthMTLink.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
