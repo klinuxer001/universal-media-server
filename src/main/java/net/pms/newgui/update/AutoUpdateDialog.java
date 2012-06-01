@@ -35,7 +35,7 @@ public class AutoUpdateDialog extends JDialog implements Observer {
 	}
 
 	AutoUpdateDialog(Window parent, AutoUpdater autoUpdater) {
-		super(parent, "PS3 Media Server Auto Update");
+		super(parent, "Universal Media Server Auto Update");
 		this.autoUpdater = autoUpdater;
 		autoUpdater.addObserver(this);
 		initComponents();
@@ -93,7 +93,7 @@ public class AutoUpdateDialog extends JDialog implements Observer {
 	@Override
 	public void update(Observable source, Object data) {
 		if (SwingUtilities.isEventDispatchThread()) {
-			throw new RuntimeException("Work is probably happening on event thread.  Bad.");
+			throw new RuntimeException("Work is probably happening on event thread. Bad.");
 		}
 		update();
 	}
