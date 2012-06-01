@@ -33,7 +33,7 @@ import org.slf4j.LoggerFactory;
 import com.sun.jna.Platform;
 
 public class PipeIPCProcess extends Thread implements ProcessWrapper {
-	private static final Logger logger = LoggerFactory.getLogger(PipeIPCProcess.class);
+	private static final Logger LOGGER = LoggerFactory.getLogger(PipeIPCProcess.class);
 	private PipeProcess mkin;
 	private PipeProcess mkout;
 	private StreamModifier modifier;
@@ -80,7 +80,7 @@ public class PipeIPCProcess extends Thread implements ProcessWrapper {
 				}
 			}
 		} catch (IOException e) {
-			logger.debug("Error :" + e.getMessage());
+			LOGGER.debug("Error :" + e.getMessage());
 		} finally {
 			try {
 				// in and out may not have been initialized:
@@ -95,7 +95,7 @@ public class PipeIPCProcess extends Thread implements ProcessWrapper {
 					debug.close();
 				}
 			} catch (IOException e) {
-				logger.debug("Error :" + e.getMessage());
+				LOGGER.debug("Error :" + e.getMessage());
 			}
 		}
 	}

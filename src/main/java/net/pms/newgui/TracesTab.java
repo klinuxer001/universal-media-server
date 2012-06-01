@@ -52,7 +52,7 @@ import com.jgoodies.forms.layout.CellConstraints;
 import com.jgoodies.forms.layout.FormLayout;
 
 public class TracesTab {
-	private static final Logger logger = LoggerFactory.getLogger(TracesTab.class);
+	private static final Logger LOGGER = LoggerFactory.getLogger(TracesTab.class);
 	private PmsConfiguration configuration;
 
 	class PopupTriggerMouseListener extends MouseAdapter {
@@ -143,7 +143,7 @@ public class TracesTab {
 					try {
 						java.awt.Desktop.getDesktop().open(logFile);
 					} catch (IOException e1) {
-						logger.error(String.format("Failed to open file %s in default editor", logFile), e1);
+						LOGGER.error(String.format("Failed to open file %s in default editor", logFile), e1);
 					}
 				}
 			});

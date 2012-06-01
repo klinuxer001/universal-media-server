@@ -19,7 +19,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class FormatConfiguration {
-	private static final Logger logger = LoggerFactory.getLogger(FormatConfiguration.class);
+	private static final Logger LOGGER = LoggerFactory.getLogger(FormatConfiguration.class);
+
 	public static final String MPEGPS = "mpegps";
 	public static final String MPEGTS = "mpegts";
 	public static final String WMV = "wmv";
@@ -123,14 +124,14 @@ public class FormatConfiguration {
 				try {
 					pformat = Pattern.compile(format);
 				} catch (PatternSyntaxException pe) {
-					logger.info("Couldn't resolve this pattern: " + format + " / " + pe.getMessage());
+					LOGGER.info("Couldn't resolve this pattern: " + format + " / " + pe.getMessage());
 					v = false;
 				}
 				if (videocodec != null) {
 					try {
 						pvideocodec = Pattern.compile(videocodec);
 					} catch (PatternSyntaxException pe) {
-						logger.info("Couldn't resolve this pattern: " + videocodec + " / " + pe.getMessage());
+						LOGGER.info("Couldn't resolve this pattern: " + videocodec + " / " + pe.getMessage());
 						v = false;
 					}
 				}
@@ -138,7 +139,7 @@ public class FormatConfiguration {
 					try {
 						paudiocodec = Pattern.compile(audiocodec);
 					} catch (PatternSyntaxException pe) {
-						logger.info("Couldn't resolve this pattern: " + audiocodec + " / " + pe.getMessage());
+						LOGGER.info("Couldn't resolve this pattern: " + audiocodec + " / " + pe.getMessage());
 						v = false;
 					}
 				}
@@ -147,7 +148,7 @@ public class FormatConfiguration {
 						imaxnbchannels = Integer.parseInt(maxnbchannels);
 					}
 				} catch (Exception e) {
-					logger.info("Error in parsing number: " + maxnbchannels);
+					LOGGER.info("Error in parsing number: " + maxnbchannels);
 					v = false;
 				}
 				try {
@@ -155,7 +156,7 @@ public class FormatConfiguration {
 						imaxfrequency = Integer.parseInt(maxfrequency);
 					}
 				} catch (Exception e) {
-					logger.info("Error in parsing number: " + maxfrequency);
+					LOGGER.info("Error in parsing number: " + maxfrequency);
 					v = false;
 				}
 				try {
@@ -163,7 +164,7 @@ public class FormatConfiguration {
 						imaxbitrate = Integer.parseInt(maxbitrate);
 					}
 				} catch (Exception e) {
-					logger.info("Error in parsing number: " + maxbitrate);
+					LOGGER.info("Error in parsing number: " + maxbitrate);
 					v = false;
 				}
 				try {
@@ -171,7 +172,7 @@ public class FormatConfiguration {
 						imaxvideowidth = Integer.parseInt(maxvideowidth);
 					}
 				} catch (Exception e) {
-					logger.info("Error in parsing number: " + maxvideowidth);
+					LOGGER.info("Error in parsing number: " + maxvideowidth);
 					v = false;
 				}
 				try {
@@ -179,7 +180,7 @@ public class FormatConfiguration {
 						imaxvideoheight = Integer.parseInt(maxvideoheight);
 					}
 				} catch (Exception e) {
-					logger.info("Error in parsing number: " + maxvideoheight);
+					LOGGER.info("Error in parsing number: " + maxvideoheight);
 					v = false;
 				}
 			}
@@ -302,7 +303,7 @@ public class FormatConfiguration {
 				if (conf.isValid()) {
 					list.add(conf);
 				} else {
-					logger.info("Invalid configuration line: " + line);
+					LOGGER.info("Invalid configuration line: " + line);
 				}
 			}
 		}

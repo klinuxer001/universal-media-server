@@ -29,7 +29,7 @@ import org.slf4j.LoggerFactory;
 // "Gob": a cryptic name for (e.g.) StreamGobbler - i.e. a stream
 // consumer that reads and discards the stream
 public class Gob extends Thread {
-	private static final Logger logger = LoggerFactory.getLogger(Gob.class);
+	private static final Logger LOGGER = LoggerFactory.getLogger(Gob.class);
 	BufferedReader in;
 
 	public Gob(InputStream in) {
@@ -41,12 +41,12 @@ public class Gob extends Thread {
 		try {
 			while ((line = in.readLine()) != null) {
 				if (!line.startsWith("100")) {
-					logger.trace(line);
+					LOGGER.trace(line);
 				}
 			}
 			in.close();
 		} catch (IOException e) {
-			logger.trace("Caught exception", e);
+			LOGGER.trace("Caught exception", e);
 		}
 
 	}

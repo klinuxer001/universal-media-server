@@ -24,7 +24,7 @@ import org.slf4j.LoggerFactory;
  */
 public class AutoUpdater extends Observable implements UriRetrieverCallback {
 	private static final String TARGET_FILENAME = "new-version.exe";
-	private static final Logger logger = LoggerFactory.getLogger(AutoUpdater.class);
+	private static final Logger LOGGER = LoggerFactory.getLogger(AutoUpdater.class);
 
 	public static enum State {
 		NOTHING_KNOWN, POLLING_SERVER, NO_UPDATE_AVAILABLE, UPDATE_AVAILABLE, DOWNLOAD_IN_PROGRESS, DOWNLOAD_FINISHED, EXECUTING_SETUP, ERROR
@@ -209,7 +209,7 @@ public class AutoUpdater extends Observable implements UriRetrieverCallback {
 			}
 			fileOnDisk = new FileOutputStream(target);
 			int bytesSaved = IOUtils.copy(downloadedFromNetwork, fileOnDisk);
-			logger.info("Wrote " + bytesSaved + " bytes to " + target.getAbsolutePath());
+			LOGGER.info("Wrote " + bytesSaved + " bytes to " + target.getAbsolutePath());
 		} finally {
 			IOUtils.closeQuietly(downloadedFromNetwork);
 			IOUtils.closeQuietly(fileOnDisk);

@@ -39,7 +39,7 @@ import com.sun.jna.ptr.LongByReference;
  *
  */
 public class WinUtils extends BasicSystemUtils implements SystemUtils {
-	private static final Logger logger = LoggerFactory.getLogger(WinUtils.class);
+	private static final Logger LOGGER = LoggerFactory.getLogger(WinUtils.class);
 
 	public interface Kernel32 extends Library {
 		Kernel32 INSTANCE = (Kernel32) Native.loadLibrary("kernel32",
@@ -80,7 +80,7 @@ public class WinUtils extends BasicSystemUtils implements SystemUtils {
 		// Disable go to sleep (every 40s)
 		if (PMS.getConfiguration().isPreventsSleep()
 				&& System.currentTimeMillis() - lastDontSleepCall > 40000) {
-			logger.trace("Calling SetThreadExecutionState ES_SYSTEM_REQUIRED");
+			LOGGER.trace("Calling SetThreadExecutionState ES_SYSTEM_REQUIRED");
 			Kernel32.INSTANCE.SetThreadExecutionState(Kernel32.ES_SYSTEM_REQUIRED | Kernel32.ES_CONTINUOUS);
 			lastDontSleepCall = System.currentTimeMillis();
 		}
@@ -94,7 +94,7 @@ public class WinUtils extends BasicSystemUtils implements SystemUtils {
 		// Reenable go to sleep
 		if (PMS.getConfiguration().isPreventsSleep()
 				&& System.currentTimeMillis() - lastGoToSleepCall > 40000) {
-			logger.trace("Calling SetThreadExecutionState ES_CONTINUOUS");
+			LOGGER.trace("Calling SetThreadExecutionState ES_CONTINUOUS");
 			Kernel32.INSTANCE.SetThreadExecutionState(Kernel32.ES_CONTINUOUS);
 			lastGoToSleepCall = System.currentTimeMillis();
 		}
@@ -136,10 +136,10 @@ public class WinUtils extends BasicSystemUtils implements SystemUtils {
 				char test[] = new char[2 + pathname.length() * 2];
 				int r = Kernel32.INSTANCE.GetShortPathNameW(pathname, test, test.length);
 				if (r > 0) {
-					logger.debug("Forcing short path name on " + pathname);
+					LOGGER.debug("Forcing short path name on " + pathname);
 					return Native.toString(test);
 				} else {
-					logger.info("File does not exist? " + pathname);
+					LOGGER.info("File does not exist? " + pathname);
 					return null;
 				}
 
@@ -276,7 +276,7 @@ public class WinUtils extends BasicSystemUtils implements SystemUtils {
 				}
 			}
 		} catch (Exception e) {
-			logger.debug("Caught exception", e);
+			LOGGER.debug("Caught exception", e);
 		}
 	}
 

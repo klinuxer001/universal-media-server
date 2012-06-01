@@ -25,7 +25,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public abstract class UnusedInputStream extends InputStream {
-	private static final Logger logger = LoggerFactory.getLogger(UnusedInputStream.class);
+	private static final Logger LOGGER = LoggerFactory.getLogger(UnusedInputStream.class);
+
 	private InputStream inputStream;
 	private UnusedProcess processToTerminate;
 	private int timeout;
@@ -51,10 +52,10 @@ public abstract class UnusedInputStream extends InputStream {
 				try {
 					Thread.sleep(timeout);
 				} catch (InterruptedException e) {
-					logger.error(null, e);
+					LOGGER.error(null, e);
 				}
 				if (processToTerminate != null && processToTerminate.isReadyToStop()) {
-					logger.debug("Destroying / Stopping attached process: " + processToTerminate);
+					LOGGER.debug("Destroying / Stopping attached process: " + processToTerminate);
 					if (processToTerminate != null) {
 						processToTerminate.stopProcess();
 					}

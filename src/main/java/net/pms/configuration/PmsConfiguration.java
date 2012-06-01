@@ -54,7 +54,7 @@ import com.sun.jna.Platform;
  * file.
  */
 public class PmsConfiguration {
-	private static final Logger logger = LoggerFactory.getLogger(PmsConfiguration.class);
+	private static final Logger LOGGER = LoggerFactory.getLogger(PmsConfiguration.class);
 	private static final int DEFAULT_PROXY_SERVER_PORT = -1;
 	private static final int DEFAULT_SERVER_PORT = 5001;
 
@@ -382,7 +382,7 @@ public class PmsConfiguration {
                 if (pmsSkelConfFile.isFile() && pmsSkelConfFile.canRead()) {
                     // load defaults from skel file, save them later to PROFILE_PATH
                     configuration.load(pmsSkelConfFile);
-                    logger.info("Default configuration loaded from " + SKEL_PROFILE_PATH);
+                    LOGGER.info("Default configuration loaded from " + SKEL_PROFILE_PATH);
                 }
             }
 		}
@@ -1787,7 +1787,7 @@ public class PmsConfiguration {
 		for (String engineId : input) {
 			if (engineId.startsWith("avs") && !registry.isAvis() && Platform.isWindows()) {
 				if (!avsHackLogged) {
-					logger.info("AviSynth is not installed. You cannot use " + engineId + " as a transcoding engine.");
+					LOGGER.info("AviSynth is not installed. You cannot use " + engineId + " as a transcoding engine.");
 					avsHackLogged = true;
 				}
 				toBeRemoved.add(engineId);
@@ -1801,7 +1801,7 @@ public class PmsConfiguration {
 
 	public void save() throws ConfigurationException {
 		configuration.save();
-		logger.info("Configuration saved to: " + PROFILE_PATH);
+		LOGGER.info("Configuration saved to: " + PROFILE_PATH);
 	}
 
 	public String getFolders() {
@@ -2219,7 +2219,7 @@ public class PmsConfiguration {
 			try {
 				HOSTNAME = InetAddress.getLocalHost().getHostName();
 			} catch (UnknownHostException e) {
-				logger.info("Can't determine hostname");
+				LOGGER.info("Can't determine hostname");
 				HOSTNAME = "unknown host";
 			}
 		}

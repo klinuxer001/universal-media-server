@@ -42,7 +42,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class Request extends HTTPResource {
-	private static final Logger logger = LoggerFactory.getLogger(Request.class);
+	private static final Logger LOGGER = LoggerFactory.getLogger(Request.class);
+
 	private final static String CRLF = "\r\n";
 	private final static String HTTP_200_OK = "HTTP/1.1 200 OK";
 	private final static String HTTP_500 = "HTTP/1.1 500 Internal Server Error";
@@ -185,7 +186,7 @@ public class Request extends HTTPResource {
 
 		// Samsung 2012 TVs have a problematic preceding slash that needs to be removed.
 		if (argument.startsWith("/")) {
-			logger.trace("Stripping preceding slash from: " + argument);
+			LOGGER.trace("Stripping preceding slash from: " + argument);
 			argument = argument.substring(1);
 		}
 		
@@ -231,7 +232,7 @@ public class Request extends HTTPResource {
 					inputStream = dlna.getInputStream(Range.create(lowRange, highRange, timeseek, timeRangeEnd), mediaRenderer);
 					if (inputStream == null) {
 						// No inputStream indicates that transcoding / remuxing probably crashed.
-						logger.error("There is no inputstream to return for " + name);
+						LOGGER.error("There is no inputstream to return for " + name);
 					} else {
 						startStopListenerDelegate.start(dlna);
 						output(output, "Content-Type: " + getRendererMimeType(dlna.mimeType(), mediaRenderer));
@@ -300,7 +301,7 @@ public class Request extends HTTPResource {
 							// Calculate the corresponding highRange (this is usually redundant).
 							highRange = lowRange + bytes - (bytes > 0 ? 1 : 0);
 
-							logger.trace((chunked ? "Using chunked response. " : "") + "Sending " + bytes + " bytes.");
+							LOGGER.trace((chunked ? "Using chunked response. " : "") + "Sending " + bytes + " bytes.");
 
 							output(output, "Content-Range: bytes " + lowRange
 									+ "-" + (highRange > -1 ? highRange : "*")
@@ -357,7 +358,7 @@ public class Request extends HTTPResource {
 				s = s.replace("[host]", PMS.get().getServer().getHost());
 				s = s.replace("[port]", "" + PMS.get().getServer().getPort());
 				if (xbox) {
-					logger.debug("DLNA changes for Xbox360");
+					LOGGER.debug("DLNA changes for Xbox360");
 					s = s.replace("Universal Media Server", "Universal Media Server [" + profileName + "] : Windows Media Connect");
 					s = s.replace("<modelName>PMS</modelName>", "<modelName>Windows Media Connect</modelName>");
 					s = s.replace("<serviceList>", "<serviceList>" + CRLF + "<service>" + CRLF
@@ -443,7 +444,7 @@ public class Request extends HTTPResource {
 				response.append(HTTPXMLHelper.SOAP_ENCODING_FOOTER);
 				response.append(CRLF);
 			} else if (soapaction.contains("ContentDirectory:1#Browse") || soapaction.contains("ContentDirectory:1#Search")) {
-				//logger.trace(content);
+				//LOGGER.trace(content);
 				objectID = getEnclosingValue(content, "<ObjectID>", "</ObjectID>");
 				String containerID = null;
 				if ((objectID == null || objectID.length() == 0) && xbox) {
@@ -580,7 +581,7 @@ public class Request extends HTTPResource {
 				response.append(CRLF);
 				response.append(HTTPXMLHelper.SOAP_ENCODING_FOOTER);
 				response.append(CRLF);
-				//logger.trace(response.toString());
+				//LOGGER.trace(response.toString());
 			}
 		}
 
@@ -592,7 +593,7 @@ public class Request extends HTTPResource {
 			output(output, "");
 			if (!method.equals("HEAD")) {
 				output.write(responseData);
-				//logger.trace(response.toString());
+				//LOGGER.trace(response.toString());
 			}
 		} else if (inputStream != null) {
 			if (CLoverride > -2) {
@@ -605,7 +606,7 @@ public class Request extends HTTPResource {
 				}
 			} else {
 				int cl = inputStream.available();
-				logger.trace("Available Content-Length: " + cl);
+				LOGGER.trace("Available Content-Length: " + cl);
 				output(output, "Content-Length: " + cl);
 			}
 
@@ -621,7 +622,7 @@ public class Request extends HTTPResource {
 			if (lowRange != DLNAMediaInfo.ENDFILE_POS && !method.equals("HEAD")) {
 				sendB = sendBytes(inputStream); //, ((lowRange > 0 && highRange > 0)?(highRange-lowRange):-1)
 			}
-			logger.trace("Sending stream: " + sendB + " bytes of " + argument);
+			LOGGER.trace("Sending stream: " + sendB + " bytes of " + argument);
 			PMS.get().getFrame().setStatusLine(null);
 		} else {
 			if (lowRange > 0 && highRange > 0) {
@@ -635,7 +636,7 @@ public class Request extends HTTPResource {
 
 	private void output(OutputStream output, String line) throws IOException {
 		output.write((line + CRLF).getBytes("UTF-8"));
-		logger.trace("Wrote on socket: " + line);
+		LOGGER.trace("Wrote on socket: " + line);
 	}
 
 	private String getFUTUREDATE() {
@@ -654,7 +655,7 @@ public class Request extends HTTPResource {
 				sendBytes += bytes;
 			}
 		} catch (IOException e) {
-			logger.trace("Sending stream with premature end: " + sendBytes + " bytes of " + argument + ". Reason: " + e.getMessage());
+			LOGGER.trace("Sending stream with premature end: " + sendBytes + " bytes of " + argument + ". Reason: " + e.getMessage());
 		} finally {
 			fis.close();
 		}

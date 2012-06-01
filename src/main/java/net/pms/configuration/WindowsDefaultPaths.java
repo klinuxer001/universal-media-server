@@ -6,7 +6,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 class WindowsDefaultPaths implements ProgramPaths {
-	private static final Logger logger = LoggerFactory.getLogger(WindowsDefaultPaths.class);
+	private static final Logger LOGGER = LoggerFactory.getLogger(WindowsDefaultPaths.class);
 
 	@Override
 	public String getEac3toPath() {
@@ -100,7 +100,7 @@ class WindowsDefaultPaths implements ProgramPaths {
 				return "";
 			}
 		} catch (Exception e) {
-			logger.info("Couldn't get the absolute path");
+			LOGGER.info("Couldn't get the absolute path");
 			return "";
 		}
 	}

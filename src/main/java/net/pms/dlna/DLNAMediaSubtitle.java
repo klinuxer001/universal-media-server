@@ -40,7 +40,8 @@ import org.slf4j.LoggerFactory;
  * removed.
  */
 public class DLNAMediaSubtitle extends DLNAMediaLang implements Cloneable {
-	private static final Logger logger = LoggerFactory.getLogger(DLNAMediaSubtitle.class);
+	private static final Logger LOGGER = LoggerFactory.getLogger(DLNAMediaSubtitle.class);
+
 	public static final int SUBRIP = 1;
 	public static final int TEXT = 2;
 	public static final int MICRODVD = 3;
@@ -157,13 +158,13 @@ public class DLNAMediaSubtitle extends DLNAMediaLang implements Cloneable {
 					}
 				}
 			} catch (IOException e) {
-				logger.error(null, e);
+				LOGGER.error(null, e);
 			} finally {
 				if (fis != null) {
 					try {
 						fis.close();
 					} catch (IOException e) {
-						logger.debug("Caught exception", e);
+						LOGGER.debug("Caught exception", e);
 					}
 				}
 			}

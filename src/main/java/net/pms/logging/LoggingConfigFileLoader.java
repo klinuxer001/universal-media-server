@@ -128,8 +128,8 @@ public class LoggingConfigFileLoader {
 			je.printStackTrace();
 		}
 
-		for (Logger logger : lc.getLoggerList()) {
-			Iterator<Appender<ILoggingEvent>> it = logger.iteratorForAppenders();
+		for (Logger LOGGER : lc.getLoggerList()) {
+			Iterator<Appender<ILoggingEvent>> it = LOGGER.iteratorForAppenders();
 			while (it.hasNext()) {
 				Appender<ILoggingEvent> ap = it.next();
 				if (ap instanceof FileAppender) {

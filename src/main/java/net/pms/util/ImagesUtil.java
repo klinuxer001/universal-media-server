@@ -15,14 +15,14 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class ImagesUtil {
-	private static final Logger logger = LoggerFactory.getLogger(ImagesUtil.class);
+	private static final Logger LOGGER = LoggerFactory.getLogger(ImagesUtil.class);
 
 	public static InputStream getAutoRotateInputStreamImage(InputStream input, int exifOrientation) {
 		ByteArrayOutputStream baos = new ByteArrayOutputStream();
 		try {
 			auto(input, baos, exifOrientation);
 		} catch (Exception e) {
-			logger.error("Error in auto rotate", e);
+			LOGGER.error("Error in auto rotate", e);
 			return null;
 		}
 		return new ByteArrayInputStream(baos.toByteArray());

@@ -53,7 +53,7 @@ import com.jgoodies.forms.layout.CellConstraints;
 import com.jgoodies.forms.layout.FormLayout;
 
 public class FFMpegVideo extends Player {
-	private static final Logger logger = LoggerFactory.getLogger(FFMpegVideo.class);
+	private static final Logger LOGGER = LoggerFactory.getLogger(FFMpegVideo.class);
 	public  static final String ID     = "avsffmpeg";
 
 	@Override
@@ -113,7 +113,7 @@ public class FFMpegVideo extends Player {
 			}
 			for (int i = 0; i < overriddenArgs.length; i++) {
 				if (overriddenArgs[i].equals("-f") || overriddenArgs[i].equals("-acodec") || overriddenArgs[i].equals("-vcodec")) {
-					logger.info("FFmpeg encoder settings: You cannot change Muxer, Video Codec or Audio Codec");
+					LOGGER.info("FFmpeg encoder settings: You cannot change Muxer, Video Codec or Audio Codec");
 					overriddenArgs[i] = "-title";
 					if (i + 1 < overriddenArgs.length) {
 						overriddenArgs[i + 1] = "NewTitle";
@@ -221,13 +221,13 @@ public class FFMpegVideo extends Player {
 		if (PMS.getConfiguration().isFileBuffer()) {
 			File m = new File(PMS.getConfiguration().getTempFolder(), "pms-transcode.tmp");
 			if (m.exists() && !m.delete()) {
-				logger.info("Temp file currently used.. Waiting 3 seconds");
+				LOGGER.info("Temp file currently used.. Waiting 3 seconds");
 				try {
 					Thread.sleep(3000);
 				} catch (InterruptedException e) {
 				}
 				if (m.exists() && !m.delete()) {
-					logger.info("Temp file cannot be deleted... Serious ERROR");
+					LOGGER.info("Temp file cannot be deleted... Serious ERROR");
 				}
 			}
 			params.outputFile = m;
@@ -369,7 +369,7 @@ public class FFMpegVideo extends Player {
 
 		String subLine = null;
 		if (subTrack != null && PMS.getConfiguration().getUseSubtitles() && !PMS.getConfiguration().isMencoderDisableSubs()) {
-			logger.trace("Avisynth script: Using sub track: " + subTrack);
+			LOGGER.trace("Avisynth script: Using sub track: " + subTrack);
 			if (subTrack.getFile() != null) {
 				String function = "TextSub";
 				if (subTrack.getType() == DLNAMediaSubtitle.VOBSUB) {

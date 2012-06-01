@@ -13,7 +13,7 @@ import org.slf4j.LoggerFactory;
  * @author Tim Cox (mail@tcox.org)
  */
 class TempFolder {
-	private static final Logger logger = LoggerFactory.getLogger(TempFolder.class);
+	private static final Logger LOGGER = LoggerFactory.getLogger(TempFolder.class);
 	private static final String DEFAULT_TEMP_FOLDER_NAME = "ps3mediaserver";
 	private final String userSpecifiedFolder;
 	private File tempFolder;
@@ -41,7 +41,7 @@ class TempFolder {
 		try {
 			return getUserSpecifiedTempFolder(userSpecifiedFolder);
 		} catch (IOException e) {
-			logger.error("Problem with user specified temp directory - using system", e);
+			LOGGER.error("Problem with user specified temp directory - using system", e);
 			return getSystemTempFolder();
 		}
 	}

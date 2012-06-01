@@ -55,7 +55,7 @@ public class SpeedStats {
 		return instance;
 	}
 
-	private static final Logger logger = LoggerFactory.getLogger(SpeedStats.class);
+	private static final Logger LOGGER = LoggerFactory.getLogger(SpeedStats.class);
 
 	private final Map<String, Future<Integer>> speedStats = new HashMap<String, Future<Integer>>();
 
@@ -91,14 +91,14 @@ public class SpeedStats {
 			try {
 				return doCall();
 			} catch (Exception e) {
-				logger.warn("Error measuring network throughput : " + e.getMessage(), e);
+				LOGGER.warn("Error measuring network throughput : " + e.getMessage(), e);
 				throw e;
 			}
 		}
 
 		private Integer doCall() throws Exception {
 			String ip = addr.getHostAddress();
-			logger.info("Checking IP: " + ip + " for " + rendererName);
+			LOGGER.info("Checking IP: " + ip + " for " + rendererName);
 			// calling the canonical host name the first time is slow, so we call it in a separate thread
 			String hostname = addr.getCanonicalHostName();
 			synchronized(speedStats) {
@@ -114,16 +114,16 @@ public class SpeedStats {
 							return value;
 						}
 					} catch (TimeoutException e) {
-						logger.trace("We couldn't get the value based on the canonical name");
+						LOGGER.trace("We couldn't get the value based on the canonical name");
 					}
 				}
 			}
 
 			
 			if (!ip.equals(hostname)) {
-				logger.info("Renderer " + rendererName + " found on this address: " + hostname + " (" + ip + ")");
+				LOGGER.info("Renderer " + rendererName + " found on this address: " + hostname + " (" + ip + ")");
 			} else {
-				logger.info("Renderer " + rendererName + " found on this address: " + ip);
+				LOGGER.info("Renderer " + rendererName + " found on this address: " + ip);
 			}
 
 			// let's get that speed
@@ -160,7 +160,7 @@ public class SpeedStats {
 						c++;
 					} catch (NumberFormatException e) {
 						// no big deal
-						logger.debug("Could not parse time from \"" + timeString + "\"");
+						LOGGER.debug("Could not parse time from \"" + timeString + "\"");
 					}
 				}
 			}
@@ -170,7 +170,7 @@ public class SpeedStats {
 
 			if (time > 0) {
 				int speedInMbits = 1024 / time;
-				logger.info("Address " + addr + " has an estimated network speed of: " + speedInMbits + " Mb/s");
+				LOGGER.info("Address " + addr + " has an estimated network speed of: " + speedInMbits + " Mb/s");
 				synchronized(speedStats) {
 					CompletedFuture<Integer> result = new CompletedFuture<Integer>(speedInMbits);
 					// update the statistics with a computed future value

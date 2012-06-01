@@ -65,7 +65,7 @@ import com.jgoodies.forms.layout.FormLayout;
 import com.sun.jna.Platform;
 
 public class GeneralTab {
-	private static final Logger logger = LoggerFactory.getLogger(GeneralTab.class);
+	private static final Logger LOGGER = LoggerFactory.getLogger(GeneralTab.class);
 
 	private static final String COL_SPEC = "left:pref, 2dlu, p, 2dlu , p, 2dlu, p, 2dlu, pref:grow";
 	private static final String ROW_SPEC = "p, 0dlu, p, 0dlu, p, 3dlu, p, 3dlu, p, 3dlu,p, 3dlu, p, 15dlu, p, 3dlu,p, 3dlu, p,  3dlu, p, 3dlu, p, 3dlu, p, 3dlu, p,3dlu, p, 3dlu, p, 15dlu, p,3dlu, p, 3dlu, p, 3dlu, p, 3dlu, p, 15dlu, p, 3dlu, p";
@@ -253,7 +253,7 @@ public class GeneralTab {
 					int ab = Integer.parseInt(p);
 					configuration.setServerPort(ab);
 				} catch (NumberFormatException nfe) {
-					logger.debug("Could not parse port from \"" + port.getText() + "\"");
+					LOGGER.debug("Could not parse port from \"" + port.getText() + "\"");
 				}
 
 			}
@@ -448,7 +448,7 @@ public class GeneralTab {
 		renderers.addItemListener(new ItemListener() {
 			public void itemStateChanged(ItemEvent e) {
 				if (e.getStateChange() == ItemEvent.SELECTED) {
-					logger.info("Setting renderer default: \"" + renderersKcbm.getSelectedKey() + "\"");
+					LOGGER.info("Setting renderer default: \"" + renderersKcbm.getSelectedKey() + "\"");
 					configuration.setRendererDefault((String) renderersKcbm.getSelectedKey());
 				}
 			}
@@ -465,7 +465,7 @@ public class GeneralTab {
 		int i = 1;
 		for (final ExternalListener listener : ExternalFactory.getExternalListeners()) {
 			if (i > 30) {
-				logger.warn("Plugin limit of 30 has been reached");
+				LOGGER.warn("Plugin limit of 30 has been reached");
 				break;
 			}
 			JButton bPlugin = new JButton(listener.name());

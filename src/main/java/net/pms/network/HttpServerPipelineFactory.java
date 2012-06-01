@@ -38,7 +38,7 @@ import org.slf4j.LoggerFactory;
  * @author Andy Taylor (andy.taylor@jboss.org)
  */
 public class HttpServerPipelineFactory implements ChannelPipelineFactory {
-	private static final Logger logger = LoggerFactory.getLogger(HttpServerPipelineFactory.class);
+	private static final Logger LOGGER = LoggerFactory.getLogger(HttpServerPipelineFactory.class);
 	private ChannelGroup group;
 	
 	public HttpServerPipelineFactory(ChannelGroup group) {
@@ -46,7 +46,7 @@ public class HttpServerPipelineFactory implements ChannelPipelineFactory {
 	}
 
     public ChannelPipeline getPipeline() throws Exception {
-		logger.trace("Creating new pipeline");
+		LOGGER.trace("Creating new pipeline");
 		// Create a default pipeline implementation.
 		ChannelPipeline pipeline = pipeline();
 		pipeline.addLast("decoder", new HttpRequestDecoder());

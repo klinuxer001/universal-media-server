@@ -11,7 +11,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class MediaInfoParser {
-	private static final Logger logger = LoggerFactory.getLogger(MediaInfoParser.class);
+	private static final Logger LOGGER = LoggerFactory.getLogger(MediaInfoParser.class);
 	private static MediaInfo MI;
 	private static Base64 base64;
 
@@ -32,7 +32,7 @@ public class MediaInfoParser {
 		try {
 			MI.finalize();
 		} catch (Throwable e) {
-			logger.debug("Caught exception", e);
+			LOGGER.debug("Caught exception", e);
 		}
 	}
 
@@ -158,25 +158,25 @@ public class MediaInfoParser {
 								try {
 									currentAudioTrack.setYear(Integer.parseInt(value));
 								} catch (NumberFormatException nfe) {
-									logger.debug("Could not parse year \"" + value + "\"");
+									LOGGER.debug("Could not parse year \"" + value + "\"");
 								}
 							} else if (key.equals("Track/Position") && step == MediaInfo.StreamKind.General) {
 								try {
 									currentAudioTrack.setTrack(Integer.parseInt(value));
 								} catch (NumberFormatException nfe) {
-									logger.debug("Could not parse track \"" + value + "\"");
+									LOGGER.debug("Could not parse track \"" + value + "\"");
 								}
 							} else if (key.equals("Resolution") && step == MediaInfo.StreamKind.Audio) {
 								try {
 									currentAudioTrack.setBitsperSample(Integer.parseInt(value));
 								} catch (NumberFormatException nfe) {
-									logger.debug("Could not parse bits per sample \"" + value + "\"");
+									LOGGER.debug("Could not parse bits per sample \"" + value + "\"");
 								}
 							} else if (key.equals("Video_Delay") && step == MediaInfo.StreamKind.Audio) {
 								try {
 									currentAudioTrack.setDelay(Integer.parseInt(value));
 								} catch (NumberFormatException nfe) {
-									logger.debug("Could not parse delay \"" + value + "\"");
+									LOGGER.debug("Could not parse delay \"" + value + "\"");
 								}
 							}
 						}
@@ -190,7 +190,7 @@ public class MediaInfoParser {
 				}
 				media.finalize(type, file);
 			} catch (Exception e) {
-				logger.error("Error in MediaInfo parsing:", e);
+				LOGGER.error("Error in MediaInfo parsing:", e);
 			} finally {
 				MI.Close();
 				if (media.getContainer() == null) {
@@ -401,7 +401,7 @@ public class MediaInfoParser {
 			int channels = Integer.parseInt(value);
 			return channels;
 		} catch(NumberFormatException e) {
-			logger.info("Unknown number of audio channels detected. Using 6.");
+			LOGGER.info("Unknown number of audio channels detected. Using 6.");
 			return 6;
 		}
 	}
@@ -478,7 +478,7 @@ public class MediaInfoParser {
 				return base64.decode(based64Value.getBytes());
 			}
 		} catch (Exception e) {
-			logger.error("Error in decoding thumbnail data", e);
+			LOGGER.error("Error in decoding thumbnail data", e);
 		}
 		return null;
 	}

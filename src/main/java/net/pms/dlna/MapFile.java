@@ -47,7 +47,7 @@ import org.slf4j.LoggerFactory;
  * removed.
  */
 public class MapFile extends DLNAResource {
-	private static final Logger logger = LoggerFactory.getLogger(MapFile.class);
+	private static final Logger LOGGER = LoggerFactory.getLogger(MapFile.class);
 	private List<File> discoverable;
 
 	/**
@@ -127,7 +127,7 @@ public class MapFile extends DLNAResource {
 				} else {
 					/* Optionally ignore empty directories */
 					if (f.isDirectory() && PMS.getConfiguration().isHideEmptyFolders() && !isFolderRelevant(f)) {
-						logger.debug("Ignoring empty/non-relevant directory: " + f.getName());
+						LOGGER.debug("Ignoring empty/non-relevant directory: " + f.getName());
 					} else { // Otherwise add the file
 						addChild(new RealFile(f));
 					}
@@ -274,11 +274,11 @@ public class MapFile extends DLNAResource {
 		}
 
 		for (DLNAResource f : removedFiles) {
-			logger.debug("File automatically removed: " + f.getName());
+			LOGGER.debug("File automatically removed: " + f.getName());
 		}
 
 		for (File f : addedFiles) {
-			logger.debug("File automatically added: " + f.getName());
+			LOGGER.debug("File automatically added: " + f.getName());
 		}
 
 		TranscodeVirtualFolder vf = getTranscodeFolder(false);

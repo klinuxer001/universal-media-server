@@ -48,7 +48,7 @@ import org.slf4j.LoggerFactory;
  */
 public class UnbufferedOutputFile implements BufferedOutputFile {
 
-	private static final Logger logger = LoggerFactory.getLogger(UnbufferedOutputFile.class);
+	private static final Logger LOGGER = LoggerFactory.getLogger(UnbufferedOutputFile.class);
 	
 	private PipedOutputStream pipedOutputStream;
 	private PipedInputStream pipedInputStream;
@@ -59,7 +59,7 @@ public class UnbufferedOutputFile implements BufferedOutputFile {
 		try {
 			pipedInputStream = new PipedInputStream(pipedOutputStream);
 		} catch (IOException e) {
-			logger.debug("Error creating piped input stream: " + e);
+			LOGGER.debug("Error creating piped input stream: " + e);
 		}
 	}
 	

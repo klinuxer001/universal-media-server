@@ -46,7 +46,8 @@ import org.slf4j.LoggerFactory;
  * for the specifications.
  */
 public class UPNPHelper {
-	private static final Logger logger = LoggerFactory.getLogger(UPNPHelper.class);
+	private static final Logger LOGGER = LoggerFactory.getLogger(UPNPHelper.class);
+
 	private final static String CRLF = "\r\n";
 	private final static String ALIVE = "ssdp:alive";
 	
@@ -109,19 +110,19 @@ public class UPNPHelper {
 		try {
 			DatagramSocket ssdpUniSock = new DatagramSocket();
 
-			logger.trace("Sending this reply [" + host + ":" + port + "]: " + StringUtils.replace(msg, CRLF, "<CRLF>"));
+			LOGGER.trace("Sending this reply [" + host + ":" + port + "]: " + StringUtils.replace(msg, CRLF, "<CRLF>"));
 			InetAddress inetAddr = InetAddress.getByName(host);
 			DatagramPacket dgmPacket = new DatagramPacket(msg.getBytes(), msg.length(), inetAddr, port);
 			ssdpUniSock.send(dgmPacket);
 			ssdpUniSock.close();
 
 		} catch (Exception ex) {
-			logger.info(ex.getMessage());
+			LOGGER.info(ex.getMessage());
 		}
 	}
 
 	public static void sendAlive() throws IOException {
-		logger.debug("Sending ALIVE...");
+		LOGGER.debug("Sending ALIVE...");
 
 		MulticastSocket ssdpSocket = getNewMulticastSocket();
 		sendMessage(ssdpSocket, "upnp:rootdevice", ALIVE);
@@ -151,20 +152,20 @@ public class UPNPHelper {
 				}
 			}
 		} else if (PMS.get().getServer().getNi() != null) {
-			logger.trace("Setting multicast network interface: " + PMS.get().getServer().getNi());
+			LOGGER.trace("Setting multicast network interface: " + PMS.get().getServer().getNi());
 			ssdpSocket.setNetworkInterface(PMS.get().getServer().getNi());
 		}
-		logger.trace("Sending message from multicast socket on network interface: " + ssdpSocket.getNetworkInterface());
-		logger.trace("Multicast socket is on interface: " + ssdpSocket.getInterface());
+		LOGGER.trace("Sending message from multicast socket on network interface: " + ssdpSocket.getNetworkInterface());
+		LOGGER.trace("Multicast socket is on interface: " + ssdpSocket.getInterface());
 		ssdpSocket.setTimeToLive(32);
 		ssdpSocket.joinGroup(getUPNPAddress());
-		logger.trace("Socket Timeout: " + ssdpSocket.getSoTimeout());
-		logger.trace("Socket TTL: " + ssdpSocket.getTimeToLive());
+		LOGGER.trace("Socket Timeout: " + ssdpSocket.getSoTimeout());
+		LOGGER.trace("Socket TTL: " + ssdpSocket.getTimeToLive());
 		return ssdpSocket;
 	}
 
 	public static void sendByeBye() throws IOException {
-		logger.info("Sending BYEBYE...");
+		LOGGER.info("Sending BYEBYE...");
 		MulticastSocket ssdpSocket = getNewMulticastSocket();
 
 		sendMessage(ssdpSocket, "upnp:rootdevice", BYEBYE);
@@ -188,7 +189,7 @@ public class UPNPHelper {
 	private static void sendMessage(DatagramSocket socket, String nt, String message) throws IOException {
 		String msg = buildMsg(nt, message);
 		Random rand = new Random();
-		//logger.trace( "Sending this SSDP packet: " + CRLF + msg);// StringUtils.replace(msg, CRLF, "<CRLF>"));
+		//LOGGER.trace( "Sending this SSDP packet: " + CRLF + msg);// StringUtils.replace(msg, CRLF, "<CRLF>"));
 		DatagramPacket ssdpPacket = new DatagramPacket(msg.getBytes(), msg.length(), getUPNPAddress(), UPNP_PORT);
 		socket.send(ssdpPacket);
 		sleep(rand.nextInt(1800 / 2));
@@ -214,7 +215,7 @@ public class UPNPHelper {
 							delay = 20000;
 						}
 					} catch (Exception e) {
-						logger.debug("Error while sending periodic alive message: " + e.getMessage());
+						LOGGER.debug("Error while sending periodic alive message: " + e.getMessage());
 					}
 				}
 			}
@@ -230,13 +231,13 @@ public class UPNPHelper {
 						// Use configurable source port as per http://code.google.com/p/ps3mediaserver/issues/detail?id=1166
 						MulticastSocket socket = new MulticastSocket(PMS.getConfiguration().getUpnpPort());
 						if (bindErrorReported) {
-							logger.warn("Finally, acquiring port " + PMS.getConfiguration().getUpnpPort() + " was successful!");
+							LOGGER.warn("Finally, acquiring port " + PMS.getConfiguration().getUpnpPort() + " was successful!");
 						}
 						NetworkInterface ni = NetworkConfiguration.getInstance().getNetworkInterfaceByServerName();
 						if (ni != null) {
 							socket.setNetworkInterface(ni);
 						} else if (PMS.get().getServer().getNi() != null) {
-							logger.trace("Setting multicast network interface: " + PMS.get().getServer().getNi());
+							LOGGER.trace("Setting multicast network interface: " + PMS.get().getServer().getNi());
 							socket.setNetworkInterface(PMS.get().getServer().getNi());
 						}
 						socket.setTimeToLive(4);
@@ -255,7 +256,7 @@ public class UPNPHelper {
 								int remotePort = packet_r.getPort();
 
 								if (PMS.getConfiguration().getIpFiltering().allowed(address)) {
-									logger.trace("Receiving a M-SEARCH from [" + remoteAddr + ":" + remotePort + "]");
+									LOGGER.trace("Receiving a M-SEARCH from [" + remoteAddr + ":" + remotePort + "]");
 
 									if (StringUtils.indexOf(s, "urn:schemas-upnp-org:service:ContentDirectory:1") > 0) {
 										sendDiscover(remoteAddr, remotePort, "urn:schemas-upnp-org:service:ContentDirectory:1");
@@ -277,12 +278,12 @@ public class UPNPHelper {
 								String remoteAddr = address.getHostAddress();
 								int remotePort = packet_r.getPort();
 
-								logger.trace("Receiving a NOTIFY from [" + remoteAddr + ":" + remotePort + "]");
+								LOGGER.trace("Receiving a NOTIFY from [" + remoteAddr + ":" + remotePort + "]");
 							}
 						}
 					} catch (BindException e) {
 						if (!bindErrorReported) {
-							logger.error("Unable to bind to " + PMS.getConfiguration().getUpnpPort()
+							LOGGER.error("Unable to bind to " + PMS.getConfiguration().getUpnpPort()
 							+ ", which means that PMS will not automatically appear on your renderer! "
 							+ "This usually means that another program occupies the port. Please "
 							+ "stop the other program and free up the port. "
@@ -291,7 +292,7 @@ public class UPNPHelper {
 						bindErrorReported = true;
 						sleep(5000);
 					} catch (IOException e) {
-						logger.error("UPNP network exception", e);
+						LOGGER.error("UPNP network exception", e);
 						sleep(1000);
 					}
 				}

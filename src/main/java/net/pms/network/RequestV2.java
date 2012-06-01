@@ -51,7 +51,7 @@ import org.slf4j.LoggerFactory;
  * This class handles all forms of incoming HTTP requests by constructing a proper HTTP response. 
  */
 public class RequestV2 extends HTTPResource {
-	private static final Logger logger = LoggerFactory.getLogger(RequestV2.class);
+	private static final Logger LOGGER = LoggerFactory.getLogger(RequestV2.class);
 	private final static String CRLF = "\r\n";
 	private static SimpleDateFormat sdf = new SimpleDateFormat("EEE, dd MMM yyyy HH:mm:ss", Locale.US);
 	private static int BUFFER_SIZE = 8 * 1024;
@@ -338,7 +338,7 @@ public class RequestV2 extends HTTPResource {
 
 					if (inputStream == null) {
 						// No inputStream indicates that transcoding / remuxing probably crashed.
-						logger.error("There is no inputstream to return for " + name);
+						LOGGER.error("There is no inputstream to return for " + name);
 					} else {
 						// Notify plugins that the DLNAresource is about to start playing
 						startStopListenerDelegate.start(dlna);
@@ -393,7 +393,7 @@ public class RequestV2 extends HTTPResource {
 							// Calculate the corresponding highRange (this is usually redundant).
 							highRange = lowRange + bytes - (bytes > 0 ? 1 : 0);
 
-							logger.trace((chunked ? "Using chunked response. " : "")  + "Sending " + bytes + " bytes.");
+							LOGGER.trace((chunked ? "Using chunked response. " : "")  + "Sending " + bytes + " bytes.");
 
 							output.setHeader(HttpHeaders.Names.CONTENT_RANGE, "bytes " + lowRange + "-" 
 								+ (highRange > -1 ? highRange : "*") + "/" + (totalsize > -1 ? totalsize : "*"));
@@ -450,7 +450,7 @@ public class RequestV2 extends HTTPResource {
 					s = s.replace("[port]", "" + PMS.get().getServer().getPort());
 				}
 				if (xbox) {
-					logger.debug("DLNA changes for Xbox360");
+					LOGGER.debug("DLNA changes for Xbox360");
 					s = s.replace("Universal Media Server", "Universal Media Server [" + profileName + "] : Windows Media Connect");
 					s = s.replace("<modelName>PMS</modelName>", "<modelName>Windows Media Connect</modelName>");
 					s = s.replace("<serviceList>", "<serviceList>" + CRLF + "<service>" + CRLF
@@ -674,7 +674,7 @@ public class RequestV2 extends HTTPResource {
 				response.append(CRLF);
 				response.append(HTTPXMLHelper.SOAP_ENCODING_FOOTER);
 				response.append(CRLF);
-				// logger.trace(response.toString());
+				// LOGGER.trace(response.toString());
 			}
 		} else if (method.equals("SUBSCRIBE")) {
 			output.setHeader("SID", PMS.get().usn());
@@ -732,7 +732,7 @@ public class RequestV2 extends HTTPResource {
 				}
 			} else {
 				int cl = inputStream.available();
-				logger.trace("Available Content-Length: " + cl);
+				LOGGER.trace("Available Content-Length: " + cl);
 				output.setHeader(HttpHeaders.Names.CONTENT_LENGTH, "" + cl);
 			}
 
@@ -760,7 +760,7 @@ public class RequestV2 extends HTTPResource {
 							PMS.get().getRegistry().reenableGoToSleep();
 							inputStream.close();
 						} catch (IOException e) {
-							logger.debug("Caught exception", e);
+							LOGGER.debug("Caught exception", e);
 						}
 
 						// Always close the channel after the response is sent because of
@@ -775,7 +775,7 @@ public class RequestV2 extends HTTPResource {
 					PMS.get().getRegistry().reenableGoToSleep();
 					inputStream.close();
 				} catch (IOException ioe) {
-					logger.debug("Caught exception", ioe);
+					LOGGER.debug("Caught exception", ioe);
 				}
 
 				if (close) {
@@ -808,7 +808,7 @@ public class RequestV2 extends HTTPResource {
 
 		while (it.hasNext()) {
 			String headerName = it.next();
-			logger.trace("Sent to socket: " + headerName + ": " + output.getHeader(headerName));
+			LOGGER.trace("Sent to socket: " + headerName + ": " + output.getHeader(headerName));
 		}
 
 		return future;

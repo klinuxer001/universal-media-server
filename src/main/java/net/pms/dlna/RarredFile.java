@@ -32,7 +32,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class RarredFile extends DLNAResource {
-	private static final Logger logger = LoggerFactory.getLogger(RarredFile.class);
+	private static final Logger LOGGER = LoggerFactory.getLogger(RarredFile.class);
 	private File f;
 	private Archive rarFile;
 
@@ -48,9 +48,9 @@ public class RarredFile extends DLNAResource {
 			}
 			rarFile.close();
 		} catch (RarException e) {
-			logger.error(null, e);
+			LOGGER.error(null, e);
 		} catch (IOException e) {
-			logger.error(null, e);
+			LOGGER.error(null, e);
 		}
 	}
 
@@ -85,7 +85,7 @@ public class RarredFile extends DLNAResource {
 		try {
 			t = f.exists() && !rarFile.isEncrypted();
 		} catch (Throwable th) {
-			logger.debug("Caught exception", th);
+			LOGGER.debug("Caught exception", th);
 		}
 		return t;
 	}

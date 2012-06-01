@@ -26,7 +26,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class BlockerFileInputStream extends UnusedInputStream {
-	private static final Logger logger = LoggerFactory.getLogger(BlockerFileInputStream.class);
+	private static final Logger LOGGER = LoggerFactory.getLogger(BlockerFileInputStream.class);
 	private static final int CHECK_INTERVAL = 1000;
 	private long readCount;
 	private long waitSize;
@@ -54,7 +54,7 @@ public class BlockerFileInputStream extends UnusedInputStream {
 
 	private boolean checkAvailability() throws IOException {
 		if (readCount > file.length()) {
-			logger.debug("File " + file.getAbsolutePath() + " is not that long!: " + readCount);
+			LOGGER.debug("File " + file.getAbsolutePath() + " is not that long!: " + readCount);
 			return false;
 		}
 		int c = 0;
@@ -62,7 +62,7 @@ public class BlockerFileInputStream extends UnusedInputStream {
 		long wait = firstRead ? waitSize : 100000;
 		while (writeCount - readCount <= wait && c < 15) {
 			if (c == 0) {
-				logger.trace("Suspend File Read: readCount=" + readCount + " / writeCount=" + writeCount);
+				LOGGER.trace("Suspend File Read: readCount=" + readCount + " / writeCount=" + writeCount);
 			}
 			c++;
 			try {
@@ -73,7 +73,7 @@ public class BlockerFileInputStream extends UnusedInputStream {
 		}
 
 		if (c > 0) {
-			logger.trace("Resume Read: readCount=" + readCount + " / writeCount=" + file.length());
+			LOGGER.trace("Resume Read: readCount=" + readCount + " / writeCount=" + file.length());
 		}
 		return true;
 	}
@@ -107,7 +107,7 @@ public class BlockerFileInputStream extends UnusedInputStream {
 	@Override
 	public void unusedStreamSignal() {
 		if (!file.delete()) {
-			logger.debug("Failed to delete \"" + file.getAbsolutePath() + "\"");
+			LOGGER.debug("Failed to delete \"" + file.getAbsolutePath() + "\"");
 		}
 	}
 }

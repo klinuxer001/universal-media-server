@@ -35,7 +35,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class ZippedFile extends DLNAResource {
-	private static final Logger logger = LoggerFactory.getLogger(ZippedFile.class);
+	private static final Logger LOGGER = LoggerFactory.getLogger(ZippedFile.class);
 	private File z;
 	private ZipFile zip;
 
@@ -51,9 +51,9 @@ public class ZippedFile extends DLNAResource {
 			}
 			zip.close();
 		} catch (ZipException e) {
-			logger.error(null, e);
+			LOGGER.error(null, e);
 		} catch (IOException e) {
-			logger.error(null, e);
+			LOGGER.error(null, e);
 		}
 	}
 

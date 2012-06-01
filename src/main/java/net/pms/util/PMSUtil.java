@@ -11,11 +11,11 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class PMSUtil {
-	private static final Logger logger = LoggerFactory.getLogger(PMSUtil.class);
+	private static final Logger LOGGER = LoggerFactory.getLogger(PMSUtil.class);
 
 	@Deprecated
 	public static <T> T[] copyOf(T[] original, int newLength) {
-		logger.info("deprecated PMSUtil.copyOf called");
+		LOGGER.info("deprecated PMSUtil.copyOf called");
 		return Arrays.copyOf(original, newLength);
 	}
 
@@ -26,19 +26,19 @@ public class PMSUtil {
 	 */
 	@Deprecated
 	public static void browseURI(String uri) {
-		logger.info("deprecated PMSUtil.browseURI called");
+		LOGGER.info("deprecated PMSUtil.browseURI called");
 		PMS.get().getRegistry().browseURI(uri);
 	}
 
 	@Deprecated
 	public static void addSystemTray(final LooksFrame frame) {
-		logger.info("deprecated PMSUtil.addSystemTray called");
+		LOGGER.info("deprecated PMSUtil.addSystemTray called");
 		PMS.get().getRegistry().addSystemTray(frame);
 	}
 
 	@Deprecated
 	public static boolean isNetworkInterfaceLoopback(NetworkInterface ni) throws SocketException {
-		logger.info("deprecated PMSUtil.isNetworkInterfaceLoopback called");
+		LOGGER.info("deprecated PMSUtil.isNetworkInterfaceLoopback called");
 		return PMS.get().getRegistry().isNetworkInterfaceLoopback(ni);
 	}
 
@@ -53,7 +53,7 @@ public class PMSUtil {
 	 */
 	@Deprecated
 	public static byte[] getHardwareAddress(NetworkInterface ni) throws SocketException {
-		logger.info("deprecated PMSUtil.getHardwareAddress called");
+		LOGGER.info("deprecated PMSUtil.getHardwareAddress called");
 		return PMS.get().getRegistry().getHardwareAddress(ni);
 	}
 }

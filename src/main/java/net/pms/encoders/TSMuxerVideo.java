@@ -58,7 +58,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class TSMuxerVideo extends Player {
-	private static final Logger logger = LoggerFactory.getLogger(TSMuxerVideo.class);
+	private static final Logger LOGGER = LoggerFactory.getLogger(TSMuxerVideo.class);
 	private static final String COL_SPEC = "left:pref, 0:grow";
 	private static final String ROW_SPEC = "p, 3dlu, p, 3dlu, p, 3dlu, p, 3dlu, p, 3dlu, 0:grow";
 
@@ -199,7 +199,7 @@ public class TSMuxerVideo extends Player {
 			if (media != null) {
 				boolean compat = (media.isVideoPS3Compatible(newInput) || !params.mediaRenderer.isH264Level41Limited());
 				if (!compat && params.mediaRenderer.isPS3()) {
-					logger.info("The video will not play or show a black screen on the ps3...");
+					LOGGER.info("The video will not play or show a black screen on the ps3...");
 				}
 				if (media.getH264AnnexB() != null && media.getH264AnnexB().length > 0) {
 					StreamModifier sm = new StreamModifier();

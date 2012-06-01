@@ -59,7 +59,7 @@ import org.slf4j.LoggerFactory;
 import com.sun.jna.Platform;
 
 public class RootFolder extends DLNAResource {
-	private static final Logger logger = LoggerFactory.getLogger(RootFolder.class);
+	private static final Logger LOGGER = LoggerFactory.getLogger(RootFolder.class);
 	private final PmsConfiguration configuration = PMS.getConfiguration();
 	private boolean running;
 
@@ -197,7 +197,7 @@ public class RootFolder extends DLNAResource {
 						trace = Messages.getString("DLNAMediaDatabase.4") + " " + child.getName();
 					}
 					if (trace != null) {
-						logger.debug(trace);
+						LOGGER.debug(trace);
 						PMS.get().getFrame().setStatusLine(trace);
 					}
 					if (child.isDiscovered()) {
@@ -293,15 +293,15 @@ public class RootFolder extends DLNAResource {
 							}
 						} catch (ArrayIndexOutOfBoundsException e) {
 							// catch exception here and go with parsing
-							logger.info("Error at line " + br.getLineNumber() + " of WEB.conf: " + e.getMessage());
-							logger.debug(null, e);
+							LOGGER.info("Error at line " + br.getLineNumber() + " of WEB.conf: " + e.getMessage());
+							LOGGER.debug(null, e);
 						}
 					}
 				}
 				br.close();
 			} catch (IOException e) {
-				logger.info("Unexpected error in WEB.conf" + e.getMessage());
-				logger.debug(null, e);
+				LOGGER.info("Unexpected error in WEB.conf" + e.getMessage());
+				LOGGER.debug(null, e);
 			}
 		}
 	}
@@ -390,14 +390,14 @@ public class RootFolder extends DLNAResource {
 						res.addChild(rf);
 					}
 				} else {
-					logger.info("iPhoto folder not found");
+					LOGGER.info("iPhoto folder not found");
 				}
 			} catch (XmlParseException e) {
-				logger.error("Something went wrong with the iPhoto Library scan: ", e);
+				LOGGER.error("Something went wrong with the iPhoto Library scan: ", e);
 			} catch (URISyntaxException e) {
-				logger.error("Something went wrong with the iPhoto Library scan: ", e);
+				LOGGER.error("Something went wrong with the iPhoto Library scan: ", e);
 			} catch (IOException e) {
-				logger.error("Something went wrong with the iPhoto Library scan: ", e);
+				LOGGER.error("Something went wrong with the iPhoto Library scan: ", e);
 			}
 		}
 		return res;
@@ -436,7 +436,7 @@ public class RootFolder extends DLNAResource {
 				in.close();
 				
 			} catch (Exception e) {
-				logger.error("Something went wrong with the aperture library scan: ", e);
+				LOGGER.error("Something went wrong with the aperture library scan: ", e);
 			} finally {
 				// Avoid zombie processes, or open stream failures...
 				if (prc!=null) {
@@ -446,22 +446,22 @@ public class RootFolder extends DLNAResource {
 						prc.waitFor();
 					} catch (InterruptedException e) {
 						// Can this thread be interrupted? don't think so or, and even when.. what will happen?
-						logger.warn("Interrupted while waiting for stream for process" + e.getMessage());
+						LOGGER.warn("Interrupted while waiting for stream for process" + e.getMessage());
 					}
 					try {
 						prc.getErrorStream().close();
 					} catch (Exception e) {
-						logger.warn("Could not close stream for output process", e);
+						LOGGER.warn("Could not close stream for output process", e);
 					}
 					try {
 						prc.getInputStream().close();
 					} catch (Exception e) {
-						logger.warn("Could not close stream for output process", e);
+						LOGGER.warn("Could not close stream for output process", e);
 					}
 					try {
 						prc.getOutputStream().close();
 					} catch (Exception e) {
-						logger.warn("Could not close stream for output process", e);
+						LOGGER.warn("Could not close stream for output process", e);
 					}
 				}
 			}
@@ -497,7 +497,7 @@ public class RootFolder extends DLNAResource {
 				mediaName = "unknown library";
 			}
 
-			logger.info("Going to parse aperture library: " + mediaName);
+			LOGGER.info("Going to parse aperture library: " + mediaName);
 			res  = new VirtualFolder(mediaName, null);
 			listOfAlbums = (ArrayList<?>) iPhotoLib.get("List of Albums"); // the list of events (rolls)
 
@@ -510,7 +510,7 @@ public class RootFolder extends DLNAResource {
 				}
 			}
 		} else {
-			logger.info("No Aperture library found.");
+			LOGGER.info("No Aperture library found.");
 		}
 		return res;
 	}
@@ -608,7 +608,7 @@ public class RootFolder extends DLNAResource {
 				location = location + "\\iTunes\\iTunes Music Library.xml";
 				iTunesFile = location;
 			} else {
-				logger.info("Could not find the My Music folder");
+				LOGGER.info("Could not find the My Music folder");
 			}
 		}
 
@@ -672,10 +672,10 @@ public class RootFolder extends DLNAResource {
 						res.addChild(pf);
 					}
 				} else {
-					logger.info("Could not find the iTunes file");
+					LOGGER.info("Could not find the iTunes file");
 				}
 			} catch (Exception e) {
-				logger.error("Something went wrong with the iTunes Library scan: ", e);
+				LOGGER.error("Something went wrong with the iTunes Library scan: ", e);
 			}
 		}
 		return res;
@@ -781,7 +781,7 @@ public class RootFolder extends DLNAResource {
 					try {
 						configuration.save();
 					} catch (ConfigurationException e) {
-						logger.debug("Caught exception", e);
+						LOGGER.debug("Caught exception", e);
 					}
 					return true;
 				}
@@ -810,7 +810,7 @@ public class RootFolder extends DLNAResource {
 				try {
 					res.add(afar.getChild());
 				} catch (Throwable t) {
-					logger.error(String.format("Failed to append AdditionalFolderAtRoot with name=%s, class=%s", afar.name(), afar.getClass()), t);
+					LOGGER.error(String.format("Failed to append AdditionalFolderAtRoot with name=%s, class=%s", afar.name(), afar.getClass()), t);
 				}
 			} else if (listener instanceof AdditionalFoldersAtRoot) {
 				java.util.Iterator<DLNAResource> folders = ((AdditionalFoldersAtRoot) listener).getChildren();
@@ -819,7 +819,7 @@ public class RootFolder extends DLNAResource {
 					try {
 						res.add(resource);
 					} catch (Throwable t) {
-						logger.error(String.format("Failed to append AdditionalFolderAtRoots with class=%s for DLNAResource=%s", listener.getClass(), resource.getClass()), t);
+						LOGGER.error(String.format("Failed to append AdditionalFolderAtRoots with class=%s for DLNAResource=%s", listener.getClass(), resource.getClass()), t);
 					}
 				}
 			}

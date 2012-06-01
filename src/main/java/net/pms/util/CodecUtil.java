@@ -36,7 +36,7 @@ import net.pms.dlna.DLNAMediaAudio;
 import com.sun.jna.Platform;
 
 public class CodecUtil {
-	private static final Logger logger = LoggerFactory.getLogger(CodecUtil.class);
+	private static final Logger LOGGER = LoggerFactory.getLogger(CodecUtil.class);
 	private static final ArrayList<String> codecs = new ArrayList<String>();
 
 	static {
@@ -65,7 +65,7 @@ public class CodecUtil {
 			br.close();
 			codecs.add("iso");
 		} catch (IOException e) {
-			logger.error("Error while retrieving codec list", e);
+			LOGGER.error("Error while retrieving codec list", e);
 		}
 	}
 

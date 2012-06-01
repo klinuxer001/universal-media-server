@@ -7,7 +7,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class H264AnnexBInputStream extends InputStream {
-	private static final Logger logger = LoggerFactory.getLogger(H264AnnexBInputStream.class);
+	private static final Logger LOGGER = LoggerFactory.getLogger(H264AnnexBInputStream.class);
 	private InputStream source;
 	private int nextTarget;
 	private boolean firstHeader;
@@ -69,14 +69,14 @@ public class H264AnnexBInputStream extends InputStream {
 				System.arraycopy(defHeader, 0, b, off, (len - off));
 				off = len;
 			}
-			//logger.info("header inserted / nextTarget: " + nextTarget);
+			//LOGGER.info("header inserted / nextTarget: " + nextTarget);
 			firstHeader = false;
 		}
 
 		if (h != null) {
 			System.arraycopy(h, 0, b, off, 3);
 			off += 3;
-			//logger.info("frame start inserted");
+			//LOGGER.info("frame start inserted");
 		}
 
 		if (nextTarget < (len - off)) {
@@ -86,7 +86,7 @@ public class H264AnnexBInputStream extends InputStream {
 				return -1;
 			}
 			System.arraycopy(h, 0, b, off, nextTarget);
-			//logger.info("Frame copied: " + nextTarget);
+			//LOGGER.info("Frame copied: " + nextTarget);
 			off += nextTarget;
 
 			nextTarget = -1;
@@ -98,7 +98,7 @@ public class H264AnnexBInputStream extends InputStream {
 				return -1;
 			}
 			System.arraycopy(h, 0, b, off, (len - off));
-			//logger.info("Frame copied: " + (len - off));
+			//LOGGER.info("Frame copied: " + (len - off));
 			nextTarget = nextTarget - (len - off);
 			off = len;
 
@@ -109,7 +109,7 @@ public class H264AnnexBInputStream extends InputStream {
 
 	private byte[] getArray(int length) throws IOException {
 		if (length < 0) {
-			logger.trace("Negative array ?");
+			LOGGER.trace("Negative array ?");
 			return null;
 		}
 		byte bb[] = new byte[length];

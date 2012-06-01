@@ -32,7 +32,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class RarredEntry extends DLNAResource implements IPushOutput {
-	private static final Logger logger = LoggerFactory.getLogger(RarredEntry.class);
+	private static final Logger LOGGER = LoggerFactory.getLogger(RarredEntry.class);
 	private String name;
 	private File pere;
 	private String fileheadername;
@@ -110,17 +110,17 @@ public class RarredEntry extends DLNAResource implements IPushOutput {
 						}
 					}
 					if (header != null) {
-						logger.trace("Starting the extraction of " + header.getFileNameString());
+						LOGGER.trace("Starting the extraction of " + header.getFileNameString());
 						rarFile.extractFile(header, out);
 					}
 				} catch (Exception e) {
-					logger.debug("Unpack error, maybe it's normal, as backend can be terminated: " + e.getMessage());
+					LOGGER.debug("Unpack error, maybe it's normal, as backend can be terminated: " + e.getMessage());
 				} finally {
 					try {
 						rarFile.close();
 						out.close();
 					} catch (IOException e) {
-						logger.debug("Caught exception", e);
+						LOGGER.debug("Caught exception", e);
 					}
 				}
 			}

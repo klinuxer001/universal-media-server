@@ -39,7 +39,7 @@ import com.sun.jna.ptr.IntByReference;
 import com.sun.jna.win32.StdCallLibrary;
 
 public class WindowsNamedPipe extends Thread implements ProcessWrapper {
-	private static final Logger logger = LoggerFactory.getLogger(WindowsNamedPipe.class);
+	private static final Logger LOGGER = LoggerFactory.getLogger(WindowsNamedPipe.class);
 
 	/**
 	 * Size for the buffer used in defining pipes for Windows in bytes. The buffer is used
@@ -113,7 +113,7 @@ public class WindowsNamedPipe extends Thread implements ProcessWrapper {
 		this.name = "\\\\.\\pipe\\" + this.name;
 		this.in = in;
 		this.forcereconnect = forcereconnect;
-		logger.debug("Creating pipe " + this.name);
+		LOGGER.debug("Creating pipe " + this.name);
 
 		try {
 			if (PMS.get().isWindows()) {
@@ -142,12 +142,12 @@ public class WindowsNamedPipe extends Thread implements ProcessWrapper {
 				//Thread.sleep(150);
 			}
 		} catch (Exception e1) {
-			logger.debug("Caught exception", e1);
+			LOGGER.debug("Caught exception", e1);
 		}
 	}
 
 	public void run() {
-		logger.debug("Waiting for pipe connection " + this.name);
+		LOGGER.debug("Waiting for pipe connection " + this.name);
 		boolean b1 = Kernel32.INSTANCE.ConnectNamedPipe(handle1, null);
 
 		if (forcereconnect) {
@@ -157,11 +157,11 @@ public class WindowsNamedPipe extends Thread implements ProcessWrapper {
 				} catch (InterruptedException e) {
 				}
 			}
-			logger.debug("Forced reconnection of " + name + " with result : " + b2);
+			LOGGER.debug("Forced reconnection of " + name + " with result : " + b2);
 			handle1 = handle2;
 		}
 
-		logger.debug("Result of " + this.name + " : " + b1);
+		LOGGER.debug("Result of " + this.name + " : " + b1);
 
 		try {
 			if (b1) {
@@ -224,7 +224,7 @@ public class WindowsNamedPipe extends Thread implements ProcessWrapper {
 						boolean fSuccess = Kernel32.INSTANCE.WriteFile(handle1,
 							buffer, cbBytesRead, ibw, null);
 						int cbWritten = ibw.getValue();
-						//logger.info(name + "fSuccess" + fSuccess + " cbWritten: " + cbWritten);
+						//LOGGER.info(name + "fSuccess" + fSuccess + " cbWritten: " + cbWritten);
 						if (debug != null) {
 							debug.write(buffer.getByteArray(0, cbBytesRead));
 						}
@@ -239,12 +239,12 @@ public class WindowsNamedPipe extends Thread implements ProcessWrapper {
 				}
 			}
 		} catch (IOException e) {
-			logger.debug("Error: " + e.getMessage());
+			LOGGER.debug("Error: " + e.getMessage());
 		}
 
 		if (!in) {
 
-			logger.debug("Disconnected pipe: " + name);
+			LOGGER.debug("Disconnected pipe: " + name);
 			Kernel32.INSTANCE.FlushFileBuffers(handle1);
 			Kernel32.INSTANCE.DisconnectNamedPipe(handle1);
 		} else {

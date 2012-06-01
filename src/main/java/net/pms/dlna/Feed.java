@@ -46,7 +46,7 @@ import org.slf4j.LoggerFactory;
  * removed.
  */
 public class Feed extends DLNAResource {
-	private static final Logger logger = LoggerFactory.getLogger(Feed.class);
+	private static final Logger LOGGER = LoggerFactory.getLogger(Feed.class);
 
 	/**
 	 * @deprecated Use standard getter and setter to access this variable.
@@ -96,7 +96,7 @@ public class Feed extends DLNAResource {
 		try {
 			parse();
 		} catch (Exception e) {
-			logger.error("Error in parsing stream: " + url, e);
+			LOGGER.error("Error in parsing stream: " + url, e);
 		}
 	}
 
@@ -217,7 +217,7 @@ public class Feed extends DLNAResource {
 			getChildren().clear();
 			parse();
 		} catch (Exception e) {
-			logger.error("Error in parsing stream: " + url, e);
+			LOGGER.error("Error in parsing stream: " + url, e);
 		}
 	}
 

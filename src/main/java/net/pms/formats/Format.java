@@ -34,7 +34,7 @@ import org.slf4j.LoggerFactory;
  * Abstract class to store known information about a given format.
  */
 public abstract class Format implements Cloneable {
-	private static final Logger logger = LoggerFactory.getLogger(Format.class);
+	private static final Logger LOGGER = LoggerFactory.getLogger(Format.class);
 
 	public int getType() {
 		return type;
@@ -180,7 +180,7 @@ public abstract class Format implements Cloneable {
 		try {
 			o = super.clone();
 		} catch (CloneNotSupportedException e) {
-			logger.error(null, e);
+			LOGGER.error(null, e);
 		}
 		return o;
 	}
@@ -201,7 +201,7 @@ public abstract class Format implements Cloneable {
 		} else {
 			media.parse(file, this, type, false);
 		}
-		logger.trace("Parsing results: " + file + " / " + media);
+		LOGGER.trace("Parsing results: " + file + " / " + media);
 	}
 
 	/**

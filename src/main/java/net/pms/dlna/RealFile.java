@@ -36,7 +36,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class RealFile extends MapFile {
-	private static final Logger logger = LoggerFactory.getLogger(RealFile.class);
+	private static final Logger LOGGER = LoggerFactory.getLogger(RealFile.class);
 
 	public RealFile(File file) {
 		getConf().getFiles().add(file);
@@ -70,9 +70,9 @@ public class RealFile extends MapFile {
 				// fine tuning: bad parsing = no file !
 				valid = false;
 				if (getMedia().isEncrypted()) {
-					logger.info("The file " + file.getAbsolutePath() + " is encrypted. It will be hidden");
+					LOGGER.info("The file " + file.getAbsolutePath() + " is encrypted. It will be hidden");
 				} else {
-					logger.info("The file " + file.getAbsolutePath() + " was badly parsed. It will be hidden");
+					LOGGER.info("The file " + file.getAbsolutePath() + " was badly parsed. It will be hidden");
 				}
 			}
 			if (getParent().getDefaultRenderer().isMediaParserV2ThumbnailGeneration()) {
@@ -87,7 +87,7 @@ public class RealFile extends MapFile {
 		try {
 			return new FileInputStream(getFile());
 		} catch (FileNotFoundException e) {
-			logger.debug("File not found: \"" + getFile().getAbsolutePath() + "\"");
+			LOGGER.debug("File not found: \"" + getFile().getAbsolutePath() + "\"");
 		}
 		return null;
 	}

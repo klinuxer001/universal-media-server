@@ -72,7 +72,8 @@ import com.jgoodies.looks.plastic.PlasticLookAndFeel;
 import com.sun.jna.Platform;
 
 public class LooksFrame extends JFrame implements IFrame, Observer {
-	private static final Logger logger = LoggerFactory.getLogger(LooksFrame.class);
+	private static final Logger LOGGER = LoggerFactory.getLogger(LooksFrame.class);
+
 	private final AutoUpdater autoUpdater;
 	private final PmsConfiguration configuration;
 	public static final String START_SERVICE = "start.service";
@@ -131,14 +132,14 @@ public class LooksFrame extends JFrame implements IFrame, Observer {
 						systemClassName = gtkLAF;
 					}
 				} catch (ClassNotFoundException ce) {
-					logger.debug("Caught exception", ce);
+					LOGGER.debug("Caught exception", ce);
 				}
 
-				logger.debug("Choosing java look and feel: " + systemClassName);
+				LOGGER.debug("Choosing java look and feel: " + systemClassName);
 				UIManager.setLookAndFeel(systemClassName);
 			} catch (Exception e1) {
 				selectedLaf = new PlasticLookAndFeel();
-				logger.error("Error while setting native look and feel: ", e1);
+				LOGGER.error("Error while setting native look and feel: ", e1);
 			}
 		}
 
@@ -160,7 +161,7 @@ public class LooksFrame extends JFrame implements IFrame, Observer {
 			try {
 				UIManager.setLookAndFeel(selectedLaf);
 			} catch (UnsupportedLookAndFeelException e) {
-				logger.debug("Cannot change look and feel", e);
+				LOGGER.debug("Cannot change look and feel", e);
 			}
 		}
 
@@ -404,7 +405,7 @@ public class LooksFrame extends JFrame implements IFrame, Observer {
 		try {
 			Thread.sleep(100);
 		} catch (InterruptedException e) {
-			logger.error(null, e);
+			LOGGER.error(null, e);
 		}
 		System.exit(0);
 	}
@@ -425,7 +426,7 @@ public class LooksFrame extends JFrame implements IFrame, Observer {
 		try {
 			st.getImagePanel().set(ImageIO.read(LooksFrame.class.getResourceAsStream("/resources/images/" + icon)));
 		} catch (IOException e) {
-			logger.error(null, e);
+			LOGGER.error(null, e);
 		}
 	}
 
@@ -473,7 +474,7 @@ public class LooksFrame extends JFrame implements IFrame, Observer {
 			try {
 				AutoUpdateDialog.showIfNecessary(this, autoUpdater);
 			} catch (NoClassDefFoundError ncdf) {
-				logger.info("Class not found: " + ncdf.getMessage());
+				LOGGER.info("Class not found: " + ncdf.getMessage());
 			}
 		}
 	}

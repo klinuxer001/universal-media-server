@@ -48,7 +48,7 @@ import org.slf4j.LoggerFactory;
  *
  */
 public class BasicSystemUtils implements SystemUtils {
-	private final static Logger logger = LoggerFactory.getLogger(BasicSystemUtils.class); 
+	private final static Logger LOGGER = LoggerFactory.getLogger(BasicSystemUtils.class); 
 
 	protected String vlcp;
 	protected String vlcv;
@@ -124,9 +124,9 @@ public class BasicSystemUtils implements SystemUtils {
 		try {
 			Desktop.getDesktop().browse(new URI(uri));
 		} catch (IOException e) {
-			logger.trace("Unable to open the given URI: " + uri + ".");
+			LOGGER.trace("Unable to open the given URI: " + uri + ".");
 		} catch (URISyntaxException e) {
-			logger.trace("Unable to open the given URI: " + uri + ".");
+			LOGGER.trace("Unable to open the given URI: " + uri + ".");
 		}
 	}
 
@@ -174,7 +174,7 @@ public class BasicSystemUtils implements SystemUtils {
 			try {
 				tray.add(trayIcon);
 			} catch (AWTException e) {
-				logger.debug("Caught exception", e);
+				LOGGER.debug("Caught exception", e);
 			}
 		}
 	}

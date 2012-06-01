@@ -30,7 +30,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class FileTranscodeVirtualFolder extends VirtualFolder {
-	private static final Logger logger = LoggerFactory.getLogger(FileTranscodeVirtualFolder.class);
+	private static final Logger LOGGER = LoggerFactory.getLogger(FileTranscodeVirtualFolder.class);
 	private boolean resolved;
 
 	public FileTranscodeVirtualFolder(String name, String thumbnailIcon, boolean copy) {
@@ -85,7 +85,7 @@ public class FileTranscodeVirtualFolder extends VirtualFolder {
 						addChildInternal(newChild);
 						addChapterFile(newChild);
 
-						logger.debug("Duplicate " + ref.getName() + " with player: " + ref.getPlayer().toString() + " and aid: " + newChild.getMediaAudio().getId() + " and sid: " + newChild.getMediaSubtitle());
+						LOGGER.debug("Duplicate " + ref.getName() + " with player: " + ref.getPlayer().toString() + " and aid: " + newChild.getMediaAudio().getId() + " and sid: " + newChild.getMediaSubtitle());
 					}
 				}
 
@@ -118,7 +118,7 @@ public class FileTranscodeVirtualFolder extends VirtualFolder {
 					addChapterFile(justStreamed);
 
 					if (renderer != null) {
-						logger.debug("Duplicate " + ref.getName() + " for direct streaming to renderer: " + renderer.getRendererName());
+						LOGGER.debug("Duplicate " + ref.getName() + " for direct streaming to renderer: " + renderer.getRendererName());
 					}
 				}
 			}

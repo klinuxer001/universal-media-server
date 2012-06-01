@@ -9,7 +9,7 @@ import net.pms.PMS;
 import net.pms.io.SystemUtils;
 
 class WindowsRegistryProgramPaths implements ProgramPaths {
-	private static final Logger logger = LoggerFactory.getLogger(WindowsRegistryProgramPaths.class);
+	private static final Logger LOGGER = LoggerFactory.getLogger(WindowsRegistryProgramPaths.class);
 	private final ProgramPaths defaults;
 
 	WindowsRegistryProgramPaths(ProgramPaths defaults) {
@@ -53,7 +53,7 @@ class WindowsRegistryProgramPaths implements ProgramPaths {
 			String vlc = registry.getVlcp();
 			String version = registry.getVlcv();
 			if (new File(vlc).exists() && version != null) {
-				logger.debug("Found VLC version " + version + " in Windows Registry: " + vlc);
+				LOGGER.debug("Found VLC version " + version + " in Windows Registry: " + vlc);
 				return vlc;
 			}
 		}

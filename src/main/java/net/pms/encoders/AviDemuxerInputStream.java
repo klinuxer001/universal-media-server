@@ -41,7 +41,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class AviDemuxerInputStream extends InputStream {
-	private static final Logger logger = LoggerFactory.getLogger(AviDemuxerInputStream.class);
+	private static final Logger LOGGER = LoggerFactory.getLogger(AviDemuxerInputStream.class);
 
 	@Override
 	public void close() throws IOException {
@@ -67,7 +67,7 @@ public class AviDemuxerInputStream extends InputStream {
 
 	public AviDemuxerInputStream(InputStream fin, final OutputParams params, ArrayList<ProcessWrapper> at) throws IOException {
 		stream = fin;
-		logger.trace("Opening AVI Stream");
+		LOGGER.trace("Opening AVI Stream");
 		this.attachedProcesses = at;
 		this.params = params;
 
@@ -86,7 +86,7 @@ public class AviDemuxerInputStream extends InputStream {
 							out.write(b, 0, n);
 						}
 					} catch (Exception e) {
-						logger.error(null, e);
+						LOGGER.error(null, e);
 					}
 
 				}
@@ -140,9 +140,9 @@ public class AviDemuxerInputStream extends InputStream {
 
 					realIS = tsPipe.getInputStream();
 					ProcessUtil.waitFor(process);
-					logger.trace("tsMuxeR muxing finished");
+					LOGGER.trace("tsMuxeR muxing finished");
 				} catch (IOException e) {
-					logger.error(null, e);
+					LOGGER.error(null, e);
 				}
 			}
 		};
@@ -153,19 +153,19 @@ public class AviDemuxerInputStream extends InputStream {
 					//Thread.sleep(500);
 					parseHeader();
 				} catch (IOException e) {
-					logger.debug("Parsing error", e);
+					LOGGER.debug("Parsing error", e);
 				}
 			}
 		};
 
-		logger.trace("Launching tsMuxeR muxing");
+		LOGGER.trace("Launching tsMuxeR muxing");
 		new Thread(r, "Avi Demuxer tsMuxeR").start();
 		parsing = new Thread(r2, "Avi Demuxer Header Parser");
-		logger.trace("Ready to mux");
+		LOGGER.trace("Ready to mux");
 	}
 
 	private void parseHeader() throws IOException {
-		logger.trace("Parsing AVI Stream");
+		LOGGER.trace("Parsing AVI Stream");
 		String id = getString(stream, 4);
 		getBytes(stream, 4);
 		String type = getString(stream, 4);
@@ -276,7 +276,7 @@ public class AviDemuxerInputStream extends InputStream {
 			i += size + 8;
 		}
 
-		logger.trace("Found " + streamNumber + " stream(s)");
+		LOGGER.trace("Found " + streamNumber + " stream(s)");
 
 		boolean init = false;
 		while (true) {
@@ -285,7 +285,7 @@ public class AviDemuxerInputStream extends InputStream {
 			try {
 				command = getString(stream, 4);
 			} catch (Exception e) {
-				logger.trace("Error attendue: " + e.getMessage());
+				LOGGER.trace("Error attendue: " + e.getMessage());
 				break;
 			}
 			if (command == null) {
@@ -347,7 +347,7 @@ public class AviDemuxerInputStream extends InputStream {
 			}
 
 		}
-		logger.trace("output pipes closed");
+		LOGGER.trace("output pipes closed");
 		aOut.close();
 		vOut.close();
 	}
@@ -442,7 +442,7 @@ public class AviDemuxerInputStream extends InputStream {
 			try {
 				Thread.sleep(500);
 			} catch (InterruptedException e) {
-				logger.trace("Sleep interrupted", e);
+				LOGGER.trace("Sleep interrupted", e);
 			}
 			c++;
 		}
@@ -465,7 +465,7 @@ public class AviDemuxerInputStream extends InputStream {
 			try {
 				Thread.sleep(500);
 			} catch (InterruptedException e) {
-				logger.trace("Sleep interrupted", e);
+				LOGGER.trace("Sleep interrupted", e);
 			}
 			c++;
 		}

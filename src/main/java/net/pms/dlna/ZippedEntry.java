@@ -32,7 +32,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class ZippedEntry extends DLNAResource implements IPushOutput {
-	private static final Logger logger = LoggerFactory.getLogger(ZippedEntry.class);
+	private static final Logger LOGGER = LoggerFactory.getLogger(ZippedEntry.class);
 	private File z;
 	private String zeName;
 	private long length;
@@ -108,13 +108,13 @@ public class ZippedEntry extends DLNAResource implements IPushOutput {
 					}
 					in.close();
 				} catch (Exception e) {
-					logger.debug("Unpack error, maybe it's normal, as backend can be terminated: " + e.getMessage());
+					LOGGER.debug("Unpack error, maybe it's normal, as backend can be terminated: " + e.getMessage());
 				} finally {
 					try {
 						zipFile.close();
 						out.close();
 					} catch (IOException e) {
-						logger.debug("Caught exception", e);
+						LOGGER.debug("Caught exception", e);
 					}
 				}
 			}

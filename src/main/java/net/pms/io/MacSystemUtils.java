@@ -11,7 +11,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class MacSystemUtils extends BasicSystemUtils {
-	private final static Logger logger = LoggerFactory.getLogger(MacSystemUtils.class); 
+	private final static Logger LOGGER = LoggerFactory.getLogger(MacSystemUtils.class); 
 
 	public MacSystemUtils() {
 	}
@@ -24,7 +24,7 @@ public class MacSystemUtils extends BasicSystemUtils {
 			Runtime.getRuntime().exec(new String[] { "open", uri });
 			
 		} catch (IOException e) {
-			logger.trace("Unable to open the given URI: " + uri + ".");
+			LOGGER.trace("Unable to open the given URI: " + uri + ".");
 		}
 	}
 	
@@ -75,9 +75,9 @@ public class MacSystemUtils extends BasicSystemUtils {
 				}
 			}
 		} catch (IOException e) {
-			logger.debug("Failed to execute ifconfig", e);
+			LOGGER.debug("Failed to execute ifconfig", e);
 		} catch (InterruptedException e) {
-			logger.debug("Interrupted while waiting for ifconfig", e);
+			LOGGER.debug("Interrupted while waiting for ifconfig", e);
 			Thread.interrupted(); // XXX work around a Java bug - see ProcessUtil.waitFor()
 		}
 		return aHardwareAddress;
