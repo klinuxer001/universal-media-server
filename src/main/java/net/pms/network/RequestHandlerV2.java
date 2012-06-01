@@ -56,8 +56,9 @@ public class RequestHandlerV2 extends SimpleChannelUpstreamHandler {
 	private static final Logger LOGGER = LoggerFactory.getLogger(RequestHandlerV2.class);
 
 	private static final Pattern TIMERANGE_PATTERN =
- Pattern.compile("timeseekrange\\.dlna\\.org\\W*npt\\W*=\\W*([\\d\\.:]+)?\\-?([\\d\\.:]+)?",
-			Pattern.CASE_INSENSITIVE);
+		Pattern.compile("timeseekrange\\.dlna\\.org\\W*npt\\W*=\\W*([\\d\\.:]+)?\\-?([\\d\\.:]+)?",
+		Pattern.CASE_INSENSITIVE);
+
 	private volatile HttpRequest nettyRequest;
 	private final ChannelGroup group;
 
@@ -140,9 +141,11 @@ public class RequestHandlerV2 extends SimpleChannelUpstreamHandler {
 			String headerLine = name + ": " + nettyRequest.getHeader(name);
 			LOGGER.trace("Received on socket: " + headerLine);
 
-			if (renderer == null && headerLine != null
-					&& headerLine.toUpperCase().startsWith("USER-AGENT")
-					&& request != null) {
+			if (
+				renderer == null && headerLine != null &&
+				headerLine.toUpperCase().startsWith("USER-AGENT") &&
+				request != null
+			) {
 				userAgentString = headerLine.substring(headerLine.indexOf(":") + 1).trim();
 
 				// Attempt 2: try to recognize the renderer by matching the "User-Agent" header
@@ -201,7 +204,7 @@ public class RequestHandlerV2 extends SimpleChannelUpstreamHandler {
 						if (end != null) {
 							request.setTimeRangeEndString(end);
 						}
-					}  else {
+					} else {
 						 // If we made it to here, none of the previous header checks matched.
 						 // Unknown headers make interesting logging info when we cannot recognize
 						 // the media renderer, so keep track of the truly unknown ones.
@@ -225,7 +228,6 @@ public class RequestHandlerV2 extends SimpleChannelUpstreamHandler {
 			} catch (Exception ee) {
 				LOGGER.error("Error parsing HTTP headers", ee);
 			}
-
 		}
 
 		if (request != null) {
@@ -260,8 +262,8 @@ public class RequestHandlerV2 extends SimpleChannelUpstreamHandler {
 		}
 
 		if (request != null) {
-			LOGGER.trace("HTTP: " + request.getArgument() + " / "
-				+ request.getLowRange() + "-" + request.getHighRange());
+			LOGGER.trace("HTTP: " + request.getArgument() + " / " +
+			request.getLowRange() + "-" + request.getHighRange());
 		}
 
 		writeResponse(e, request, ia);
@@ -351,6 +353,7 @@ public class RequestHandlerV2 extends SimpleChannelUpstreamHandler {
 			group.add(ctx.getChannel());
 		}
 	}
+
 	/* Uncomment to see channel events in the trace logs
 	@Override
 	public void handleUpstream(ChannelHandlerContext ctx, ChannelEvent e) throws Exception {
