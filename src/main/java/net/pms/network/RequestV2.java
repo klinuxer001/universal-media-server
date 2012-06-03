@@ -455,7 +455,7 @@ public class RequestV2 extends HTTPResource {
 				if (xbox) {
 					LOGGER.debug("DLNA changes for Xbox360");
 					s = s.replace("Universal Media Server", "Universal Media Server [" + profileName + "] : Windows Media Connect");
-					s = s.replace("<modelName>PMS</modelName>", "<modelName>Windows Media Connect</modelName>");
+					s = s.replace("<modelName>UMS</modelName>", "<modelName>Windows Media Connect</modelName>");
 					s = s.replace("<serviceList>", "<serviceList>" + CRLF + "<service>" + CRLF
 						+ "<serviceType>urn:microsoft.com:service:X_MS_MediaReceiverRegistrar:1</serviceType>" + CRLF
 						+ "<serviceId>urn:microsoft.com:serviceId:X_MS_MediaReceiverRegistrar</serviceId>" + CRLF
