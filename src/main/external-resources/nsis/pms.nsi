@@ -49,9 +49,18 @@ Section ""
   Call GetJRE
   Pop $R0
  
+  ReadRegStr $R3 HKCU "${REG_KEY_SOFTWARE}" "HeapMem"
+
+  ${If} $R3 == ""  ; no value found
+	StrCpy $R3 "768"
+  ${EndIf}
+
+  StrCpy $R4 "M"
+  StrCpy $R3 "-Xmx$R3$R4"
+  
   ; change for your purpose (-jar etc.)
   ${GetParameters} $1
-  StrCpy $0 '"$R0" -classpath update.jar;ums.jar -Xmx768M -Djava.net.preferIPv4Stack=true -Dfile.encoding=UTF-8 ${CLASS} $1'
+  StrCpy $0 '"$R0" -classpath update.jar;ums.jar $R3 -Djava.net.preferIPv4Stack=true -Dfile.encoding=UTF-8 ${CLASS} $1'
  
   SetOutPath $EXEDIR
   Exec $0
