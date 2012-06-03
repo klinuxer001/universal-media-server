@@ -11,6 +11,7 @@ import java.util.regex.Pattern;
 import net.pms.Messages;
 import net.pms.PMS;
 import net.pms.dlna.DLNAMediaInfo;
+import net.pms.dlna.DLNAResource;
 import net.pms.dlna.MediaInfoParser;
 import net.pms.dlna.RootFolder;
 import net.pms.formats.Format;
@@ -929,5 +930,10 @@ public class RendererConfiguration {
 			// Not natively supported.
 			return false;
 		}
+	}
+	
+	public void addFolderLimit(DLNAResource res) {
+		if(rootFolder!=null)    
+			rootFolder.setFolderLim(res);
 	}
 }
