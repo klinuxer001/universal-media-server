@@ -1,4 +1,13 @@
-﻿1.0 - 2012-05-31
+﻿1.0.1 - 2012-06-03
+
+	Fixed a bug where XBOX 360 couldn't see the server
+	Lots of language updates and fixes
+	AviSynth support was broken for some languages
+	Fixed an iPhoto bug
+	More branding
+	Code improvements
+
+1.0.0 - 2012-05-31
 
 	Renamed and rebranded to Universal Media Server
 	Updated MPlayer and MEncoder to SB34
