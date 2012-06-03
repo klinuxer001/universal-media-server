@@ -1,6 +1,6 @@
 ﻿1.0.1 - 2012-06-03
 
-	Fixed a bug where XBOX 360 couldn't see the server
+	Fixed a bug where XBOX 360 couldn't see the server (thanks to cmonster and Secate for testing)
 	Lots of language updates and fixes
 	AviSynth support was broken for some languages
 	Fixed an iPhoto bug
