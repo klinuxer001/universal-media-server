@@ -138,11 +138,13 @@ public class RequestHandler implements Runnable {
 				try {
 					StringTokenizer s = new StringTokenizer(headerLine);
 					String temp = s.nextToken();
-					if (temp.equals("GET") || temp.equals("POST") || temp.equals("HEAD")) {
+					if (temp.equals("SUBSCRIBE") || temp.equals("GET") || temp.equals("POST") || temp.equals("HEAD")) {
 						request = new Request(temp, s.nextToken().substring(1));
 						if (s.hasMoreTokens() && s.nextToken().equals("HTTP/1.0")) {
 							request.setHttp10(true);
 						}
+					} else if (request != null && temp.toUpperCase().equals("CALLBACK:")) {
+							request.setSoapaction(s.nextToken());
 					} else if (request != null && temp.toUpperCase().equals("SOAPACTION:")) {
 						request.setSoapaction(s.nextToken());
 					} else if (headerLine.toUpperCase().contains("CONTENT-LENGTH:")) {

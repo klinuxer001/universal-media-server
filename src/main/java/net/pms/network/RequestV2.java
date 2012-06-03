@@ -20,12 +20,15 @@ package net.pms.network;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.OutputStream;
+import java.net.Socket;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
 import java.util.TimeZone;
+import java.util.UUID;
 
 import net.pms.PMS;
 import net.pms.configuration.RendererConfiguration;
@@ -679,6 +682,40 @@ public class RequestV2 extends HTTPResource {
 		} else if (method.equals("SUBSCRIBE")) {
 			output.setHeader("SID", PMS.get().usn());
 			output.setHeader("TIMEOUT", "Second-1800");
+			String cb=soapaction.replace("<", "").replace(">", "");
+			String faddr=cb.replace("http://", "").replace("/", "");
+			String addr=faddr.split(":")[0];
+			int port=Integer.parseInt(faddr.split(":")[1]);
+			Socket sock=new Socket(addr,port);
+			OutputStream out=sock.getOutputStream();
+			out.write(("NOTIFY /"+argument+" HTTP/1.1").getBytes());
+			out.write(CRLF.getBytes());
+			out.write(("SID: "+PMS.get().usn()).getBytes());
+			out.write(CRLF.getBytes());
+			out.write(("SEQ: "+0).getBytes());
+			out.write(CRLF.getBytes());
+			out.write(("NT: upnp:event").getBytes());
+			out.write(CRLF.getBytes());
+			out.write(("NTS: upnp:propchange").getBytes());
+			out.write(CRLF.getBytes());
+			out.write(("HOST: "+faddr).getBytes());
+			out.write(CRLF.getBytes());
+			out.flush();
+			out.close();
+			if(argument.contains("connection_manager")) {
+				response.append(HTTPXMLHelper.eventHeader("urn:schemas-upnp-org:service:ConnectionManager:1"));
+				response.append(HTTPXMLHelper.eventProp("SinkProtocolInfo"));
+				response.append(HTTPXMLHelper.eventProp("SourceProtocolInfo"));
+				response.append(HTTPXMLHelper.eventProp("CurrentConnectionIDs"));
+				response.append(HTTPXMLHelper.EVENT_FOOTER);
+			}
+			else if(argument.contains("content_directory")) {
+				response.append(HTTPXMLHelper.eventHeader("urn:schemas-upnp-org:service:ContentDirectory:1"));
+				response.append(HTTPXMLHelper.eventProp("TransferIDs"));
+				response.append(HTTPXMLHelper.eventProp("ContainerUpdateIDs"));
+				response.append(HTTPXMLHelper.eventProp("SystemUpdateID",""+DLNAResource.getSystemUpdateId()));
+				response.append(HTTPXMLHelper.EVENT_FOOTER);
+			}
 		} else if (method.equals("NOTIFY")) {
 			output.setHeader(HttpHeaders.Names.CONTENT_TYPE, "text/xml");
 			output.setHeader("NT", "upnp:event");
