@@ -151,7 +151,7 @@ public class StatusTab {
 			if (sizeinMb > peak) {
 				peak = sizeinMb;
 			}
-			jio.setText(Messages.getString("StatusTab.8") + formatter.format(sizeinMb) + " " + Messages.getString("StatusTab.11") + "    |    " + Messages.getString("StatusTab.10") + formatter.format(peak) + " " + Messages.getString("StatusTab.11"));
+			jio.setText(Messages.getString("StatusTab.8") + " " + formatter.format(sizeinMb) + " " + Messages.getString("StatusTab.11") + "    |    " + Messages.getString("StatusTab.10") + " " + formatter.format(peak) + " " + Messages.getString("StatusTab.11"));
 			rc = v;
 		}
 	}
