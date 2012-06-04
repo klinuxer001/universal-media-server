@@ -1,4 +1,17 @@
-﻿1.0.1 - 2012-06-03
+﻿1.0.2 - 2012-06-??
+
+	Added support for LG's Smart TV Upgrader (LG 600ST)
+	Made program restarts more reliable
+	Language updates and fixes
+	Fixed bug that occurred when resetting cache
+	Made buffer display in megabytes instead of bytes
+	Updated MediaInfo to 0.7.58
+	AviSynth True Motion (InterFrame):
+		- Supports more video cards
+		- Improved stability
+		- Improved compatibility with AviSynth 2.6
+
+1.0.1 - 2012-06-03
 
 	Fixed a bug where XBOX 360 couldn't see the server (thanks to cmonster and Secate for testing)
 	Lots of language updates and fixes
