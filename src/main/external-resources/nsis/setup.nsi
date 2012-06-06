@@ -38,6 +38,15 @@ SetCompressorDictSize 32
 
 ShowUninstDetails show
 
+; Offer to install AviSynth 2.6 MT
+Section -Prerequisites
+  SetOutPath $INSTDIR\win32\avisynth
+  MessageBox MB_YESNO "AviSynth 2.6 MT is recommended. Install it now?" /SD IDYES IDNO endAviSynthInstall
+    File "..\win32\avisynth\AviSynth2.6.0MT-060412.exe"
+    ExecWait "$INSTDIR\win32\avisynth\AviSynth2.6.0MT-060412.exe"
+  endAviSynthInstall:
+SectionEnd
+
 Function CreateDesktopShortcut
   CreateShortCut "$DESKTOP\${PROJECT_NAME}.lnk" "$INSTDIR\UMS.exe"
 FunctionEnd
