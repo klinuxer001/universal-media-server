@@ -1019,6 +1019,7 @@ public class PMS {
 		LOGGER.info("OS: " + System.getProperty("os.name") + " " + System.getProperty("os.arch") + " "
 				+ System.getProperty("os.version"));
 		LOGGER.info("Encoding: " + System.getProperty("file.encoding"));
+		LOGGER.info("Memory: "+Runtime.getRuntime().maxMemory());
 		LOGGER.info("");
 
 		if (Platform.isMac()) {

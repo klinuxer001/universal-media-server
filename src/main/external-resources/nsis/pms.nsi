@@ -6,7 +6,7 @@
 !include "..\..\..\..\target\project.nsh"
 !include "..\..\..\..\target\extra.nsh"
 
-Name "PMS"
+Name "UMS"
 Caption "${PROJECT_NAME}"
 Icon "${PROJECT_BASEDIR}\src\main\external-resources\icon.ico"
  
@@ -21,7 +21,8 @@ VIProductVersion "${PROJECT_VERSION_SHORT}.0"
  
 !define JARPATH "${PROJECT_BUILD_DIR}\ums.jar"
 !define CLASS "net.pms.PMS"
-!define PRODUCT_NAME "PMS"
+!define PRODUCT_NAME "UMS"
+!define REG_KEY_SOFTWARE "SOFTWARE\${PROJECT_NAME}"
  
 ; Definitions for Java
 !define JRE6_VERSION "6.0"

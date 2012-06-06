@@ -189,7 +189,7 @@ public class PmsConfiguration {
 
 	private static String DEFAULT_AVI_SYNTH_SCRIPT;
 	private static final String BUFFER_TYPE_FILE = "file";
-	private static final int MAX_MAX_MEMORY_BUFFER_SIZE = 400;
+	private static final int MAX_MAX_MEMORY_BUFFER_SIZE = 700;
 	private static final char LIST_SEPARATOR = ',';
 	private static final String KEY_FOLDERS = "folders";
 	private final PropertiesConfiguration configuration;
