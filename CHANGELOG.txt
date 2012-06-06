@@ -1,11 +1,16 @@
 ﻿1.1.0 - 2012-06-??
 
-	Added support for LG's Smart TV Upgrader (LG 600ST)
 	Made program restarts more reliable
 	Language updates and fixes
 	Fixed bug that occurred when resetting cache
 	Made buffer display in megabytes instead of bytes
 	Updated MediaInfo to 0.7.58
+	Renderer updates:
+		- Added Yamaha RX-V671 (thanks, adresd!)
+		- Added LG Smart TV Upgrader (600ST)
+		- Improved D-Link DSM-510 image
+		- Improved Sony Blu-ray Player image
+		- Numerous small improvements
 	AviSynth True Motion (InterFrame):
 		- Supports more video cards
 		- Improved stability
