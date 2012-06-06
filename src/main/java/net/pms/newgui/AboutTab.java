@@ -28,7 +28,6 @@ import javax.imageio.ImageIO;
 import javax.swing.BorderFactory;
 import javax.swing.JComponent;
 import javax.swing.JLabel;
-import javax.swing.JProgressBar;
 import javax.swing.JScrollPane;
 
 import net.pms.Messages;
@@ -46,16 +45,6 @@ public class AboutTab {
 	private static final Logger LOGGER = LoggerFactory.getLogger(AboutTab.class);
 
 	private ImagePanel imagePanel;
-	private JLabel jl;
-	private JProgressBar jpb;
-
-	public JProgressBar getJpb() {
-		return jpb;
-	}
-
-	public JLabel getJl() {
-		return jl;
-	}
 
 	public ImagePanel getImagePanel() {
 		return imagePanel;

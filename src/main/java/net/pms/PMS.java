@@ -295,7 +295,13 @@ public class PMS {
 	 * (e.g. if the cache is disabled).
 	 */
 	public synchronized DLNAMediaDatabase getDatabase() {
-		return database;
+		if (configuration.getUseCache()) {
+			if (database == null) {
+				initializeDatabase();
+			}
+			return database;
+		}
+		return null;
 	}
 
 	/**Initialisation procedure for PMS.

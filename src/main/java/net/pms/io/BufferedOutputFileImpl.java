@@ -27,6 +27,7 @@ import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import net.pms.Messages;
 import net.pms.PMS;
 
 import org.slf4j.Logger;
@@ -219,7 +220,11 @@ public class BufferedOutputFileImpl extends OutputStream implements BufferedOutp
 					}
 					long space = (writeCount - rc);
 					LOGGER.trace("buffered: " + formatter.format(space) + " bytes / inputs: " + inputStreams.size());
-					PMS.get().getFrame().setValue((int) (100 * space / maxMemorySize), formatter.format(space) + " bytes");
+					
+					// There are 1048576 bytes in a megabyte
+					long bufferInMBs = space / 1048576;
+
+					PMS.get().getFrame().setValue((int) (100 * space / maxMemorySize), formatter.format(bufferInMBs) + " " + Messages.getString("StatusTab.12"));
 				}
 			}, 0, 2000);
 		}

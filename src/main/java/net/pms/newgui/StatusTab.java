@@ -109,7 +109,7 @@ public class StatusTab {
 
 		builder.addLabel(Messages.getString("StatusTab.6"), FormLayoutUtil.flip(cc.xy(2, 7), colSpec, orientation));
 		builder.add(jpb, FormLayoutUtil.flip(cc.xy(2, 9), colSpec, orientation));
-		//builder.addLabel(Messages.getString("StatusTab.7"),  FormLayoutUtil.flip(cc.xy(2,  11), colSpec, orientation));
+
 		jio = new JLabel(Messages.getString("StatusTab.8"));
 		builder.add(jio, FormLayoutUtil.flip(cc.xy(2, 13), colSpec, orientation));
 
@@ -151,7 +151,7 @@ public class StatusTab {
 			if (sizeinMb > peak) {
 				peak = sizeinMb;
 			}
-			jio.setText(Messages.getString("StatusTab.8") + formatter.format(sizeinMb) + " " + Messages.getString("StatusTab.11") + "    |    " + Messages.getString("StatusTab.10") + formatter.format(peak) + " " + Messages.getString("StatusTab.11"));
+			jio.setText(Messages.getString("StatusTab.8") + " " + formatter.format(sizeinMb) + " " + Messages.getString("StatusTab.11") + "    |    " + Messages.getString("StatusTab.10") + " " + formatter.format(peak) + " " + Messages.getString("StatusTab.11"));
 			rc = v;
 		}
 	}
