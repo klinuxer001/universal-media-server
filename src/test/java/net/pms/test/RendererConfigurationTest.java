@@ -52,7 +52,7 @@ public class RendererConfigurationTest {
 		// Silence all log messages from the PMS code that is being tested
 		LoggerContext context = (LoggerContext) LoggerFactory.getILoggerFactory();
 		context.reset(); 
-		
+
 		// Set locale to EN to ignore translations for renderers
 		Locale.setDefault(Locale.ENGLISH);
 
@@ -60,39 +60,39 @@ public class RendererConfigurationTest {
 		testCases.put("User-Agent: UPnP/1.0 DLNADOC/1.50", null);
 		testCases.put("User-Agent: Unknown Renderer", null);
 		testCases.put("X-Unknown-Header: Unknown Content", null);
-		
-		// From AirPlayer.conf:
+
+		// AirPlayer:
 		testCases.put("User-Agent: AirPlayer/1.0.09 CFNetwork/485.13.9 Darwin/11.0.0", "AirPlayer");
 		testCases.put("User-Agent: Lavf52.54.0", "AirPlayer");
 
-		// From BraviaEX.conf:
+		// BraviaEX:
 		testCases.put("X-AV-Client-Info: av=5.0; cn=\"Sony Corporation\"; mn=\"BRAVIA KDL-32CX520\"; mv=\"1.7\";", "Sony Bravia EX");
 
-		// From Dlink510.conf:
+		// DLink510:
 		testCases.put("User-Agent: DLNADOC/1.50 INTEL_NMPR/2.1", "D-Link DSM-510");
 
-		// From iPad-iPhone.conf:
+		// iPad-iPhone:
 		testCases.put("User-Agent: 8player lite 2.2.3 (iPad; iPhone OS 5.0.1; nl_NL)", "iPad / iPhone");
 		testCases.put("User-Agent: yxplayer2%20lite/1.2.7 CFNetwork/485.13.9 Darwin/11.0.0", "iPad / iPhone");
 		testCases.put("User-Agent: MPlayer 1.0rc4-4.2.1", "iPad / iPhone");
 		testCases.put("User-Agent: NSPlayer/4.1.0.3856", "iPad / iPhone");
 
-		// From Philips.conf:
+		// Philips:
 		testCases.put("User-Agent: Allegro-Software-WebClient/4.61 DLNADOC/1.00", "Philips Aurea");
-		
-		// From PhilipsPFL.conf:
+
+		// PhilipsPFL:
 		testCases.put("User-Agent: Windows2000/0.0 UPnP/1.0 PhilipsIntelSDK/1.4 DLNADOC/1.50", "Philips TV");
-		
-		// From PS3.conf:
+
+		// PS3:
 		testCases.put("User-Agent: PLAYSTATION 3", "Playstation 3");
 		testCases.put("X-AV-Client-Info: av=5.0; cn=\"Sony Computer Entertainment Inc.\"; mn=\"PLAYSTATION 3\"; mv=\"1.0\"", "Playstation 3");
-		
-		// From Realtek.conf:
+
+		// Realtek:
 		// FIXME: Actual conflict here! Popcorn Hour is returned...
 		//testCases.put("User-Agent: POSIX UPnP/1.0 Intel MicroStack/1.0.2718, RealtekMediaCenter, DLNADOC/1.50", "Realtek");
 		testCases.put("User-Agent: RealtekVOD neon/0.27.2", "Realtek");
-		
-		// From SamsungAllShare.conf:
+
+		// SamsungAllShare:
 		testCases.put("User-Agent: SEC_HHP_[HT]D5500/1.0", "Samsung AllShare");
 		testCases.put("User-Agent: SEC_HHP_[TV]UE32D5000/1.0", "Samsung AllShare");
 		testCases.put("User-Agent: SEC_HHP_ Family TV/1.0", "Samsung AllShare");
@@ -100,14 +100,14 @@ public class RendererConfigurationTest {
 		testCases.put("User-Agent: DLNADOC/1.50 SEC_HHP_[TV]UE32D5000/1.0", "Samsung AllShare");
 		testCases.put("User-Agent: DLNADOC/1.50 SEC_HHP_[TV]UN55D6050/1.0", "Samsung AllShare");
 		testCases.put("User-Agent: DLNADOC/1.50 SEC_HHP_ Family TV/1.0", "Samsung AllShare");
-		
-		// From WDTVLive.conf:
+
+		// WDTVLive:
 		testCases.put("User-Agent: INTEL_NMPR/2.1 DLNADOC/1.50 Intel MicroStack/1.0.1423", "WD TV Live");
-		
-		// From XBMC.conf:
+
+		// XBMC:
 		testCases.put("User-Agent: XBMC/10.0 r35648 (Mac OS X; 11.2.0 x86_64; http://www.xbmc.org)", "XBMC");
 		testCases.put("User-Agent: Platinum/0.5.3.0, DLNADOC/1.50", "XBMC");
-    }
+	}
 
 	/**
 	 * Test the RendererConfiguration class and the consistency of the renderer
@@ -157,7 +157,7 @@ public class RendererConfigurationTest {
 		// Set default to Playstation 3
 		pmsConf.setRendererDefault("Playstation 3");
 		pmsConf.setRendererForceDefault(true);
-		
+
 		// Initialize the RendererConfiguration
 		RendererConfiguration.loadRendererConfigurations(pmsConf);
 
@@ -185,7 +185,7 @@ public class RendererConfigurationTest {
 		// Set default to non existent renderer
 		pmsConf.setRendererDefault("Bogus Renderer");
 		pmsConf.setRendererForceDefault(true);
-		
+
 		// Initialize the RendererConfiguration
 		RendererConfiguration.loadRendererConfigurations(pmsConf);
 
@@ -205,40 +205,40 @@ public class RendererConfigurationTest {
 	 * @param correctRendererName
 	 *            The name of the renderer.
 	 */
-    private void testHeader(String headerLine, String correctRendererName) {
-    	if (correctRendererName != null) {
-    		// Header is supposed to match a particular renderer
-	    	if (headerLine != null && headerLine.toLowerCase().startsWith("user-agent")) {
-	    		// Match by User-Agent
-				RendererConfiguration rc = RendererConfiguration.getRendererConfigurationByUA(headerLine);
-				assertNotNull("Recognized renderer for header \"" + headerLine + "\"", rc);
-				assertEquals("Expected renderer \"" + correctRendererName + "\", "
-						+ "instead renderer \"" + rc.getRendererName() + "\" was returned for header \""
-						+ headerLine + "\"", correctRendererName, rc.getRendererName());
-	    	} else {
-	    		// Match by additional header
-				RendererConfiguration rc = RendererConfiguration.getRendererConfigurationByUAAHH(headerLine);
-				assertNotNull("Recognized renderer for header \"" + headerLine + "\"", rc);
-				assertEquals("Expected renderer \"" + correctRendererName + "\" to be recognized, "
-						+ "instead renderer \"" + rc.getRendererName() + "\" was returned for header \""
-						+ headerLine + "\"", correctRendererName, rc.getRendererName());
-	    	}
-    	} else {
-    		// Header is supposed to match no renderer at all
-	    	if (headerLine != null && headerLine.toLowerCase().startsWith("user-agent")) {
-	    		// Match by User-Agent
-				RendererConfiguration rc = RendererConfiguration.getRendererConfigurationByUA(headerLine);
-				assertEquals("Expected no matching renderer to be found for header \"" + headerLine
-						+ "\", instead renderer \"" + (rc != null ? rc.getRendererName() : "")
-						+ "\" was recognized.", null,
-						rc);
-	    	} else {
-	    		// Match by additional header
-				RendererConfiguration rc = RendererConfiguration.getRendererConfigurationByUAAHH(headerLine);
-				assertEquals("Expected no matching renderer to be found for header \"" + headerLine
-						+ "\", instead renderer \"" + (rc != null ? rc.getRendererName() : "")
-						+ "\" was recognized.", null, rc);
-	    	}
-    	}
-    }
+	private void testHeader(String headerLine, String correctRendererName) {
+		if (correctRendererName != null) {
+			// Header is supposed to match a particular renderer
+			if (headerLine != null && headerLine.toLowerCase().startsWith("user-agent")) {
+				// Match by User-Agent
+					RendererConfiguration rc = RendererConfiguration.getRendererConfigurationByUA(headerLine);
+					assertNotNull("Recognized renderer for header \"" + headerLine + "\"", rc);
+					assertEquals("Expected renderer \"" + correctRendererName + "\", "
+							+ "instead renderer \"" + rc.getRendererName() + "\" was returned for header \""
+							+ headerLine + "\"", correctRendererName, rc.getRendererName());
+			} else {
+				// Match by additional header
+					RendererConfiguration rc = RendererConfiguration.getRendererConfigurationByUAAHH(headerLine);
+					assertNotNull("Recognized renderer for header \"" + headerLine + "\"", rc);
+					assertEquals("Expected renderer \"" + correctRendererName + "\" to be recognized, "
+							+ "instead renderer \"" + rc.getRendererName() + "\" was returned for header \""
+							+ headerLine + "\"", correctRendererName, rc.getRendererName());
+			}
+		} else {
+			// Header is supposed to match no renderer at all
+			if (headerLine != null && headerLine.toLowerCase().startsWith("user-agent")) {
+				// Match by User-Agent
+					RendererConfiguration rc = RendererConfiguration.getRendererConfigurationByUA(headerLine);
+					assertEquals("Expected no matching renderer to be found for header \"" + headerLine
+							+ "\", instead renderer \"" + (rc != null ? rc.getRendererName() : "")
+							+ "\" was recognized.", null,
+							rc);
+			} else {
+				// Match by additional header
+					RendererConfiguration rc = RendererConfiguration.getRendererConfigurationByUAAHH(headerLine);
+					assertEquals("Expected no matching renderer to be found for header \"" + headerLine
+							+ "\", instead renderer \"" + (rc != null ? rc.getRendererName() : "")
+							+ "\" was recognized.", null, rc);
+			}
+		}
+	}
 }
