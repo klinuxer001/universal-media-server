@@ -1140,7 +1140,7 @@
 										<mkdir dir="${project.binaries}/osx" />
 
 										<!-- MediaInfo library needs to be in the standard library path to be found -->
-										<copy file="${project.binaries}/osx/libmediainfo.dylib" todir="${project.binaries}" />
+										<copy file="${project.binaries}/osx/libmediainfo.dylib" todir="${project.basedir}" />
 
 										<!-- Make all downloaded binaries executable -->
 										<chmod dir="${project.binaries}/osx" perm="a+x" includes="*" />
