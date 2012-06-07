@@ -62,7 +62,6 @@ public class RootFolder extends DLNAResource {
 	private static final Logger LOGGER = LoggerFactory.getLogger(RootFolder.class);
 	private final PmsConfiguration configuration = PMS.getConfiguration();
 	private boolean running;
-	private FolderLimit lim;
 
 	public RootFolder() {
 		setIndexId(0);
@@ -104,11 +103,6 @@ public class RootFolder extends DLNAResource {
 			return;
 		}
 
-		if(configuration.getFolderLimit()) {
-			lim=new FolderLimit();
-			addChild(lim);
-		}
-		
 		for (DLNAResource r : getConfiguredFolders()) {
 			addChild(r);
 		}
@@ -836,10 +830,5 @@ public class RootFolder extends DLNAResource {
 	@Override
 	public String toString() {
 		return "RootFolder[" + getChildren() + "]";
-	}
-	
-	public void setFolderLim(DLNAResource r) {
-		if(lim!=null)
-			lim.setStart(r);
 	}
 } 
