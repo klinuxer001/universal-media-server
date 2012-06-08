@@ -55,19 +55,24 @@ SectionEnd
 Var Dialog
 Var Text
 Var Label
+Var Desc
 
 Function SetMem
+	!insertmacro MUI_HEADER_TEXT "Choose Memory Allocation" "Choose the maximum amount of memory to allow UMS to use." 
 	nsDialogs::Create 1018
 	Pop $Dialog
 
 	${If} $Dialog == error
 		Abort
 	${EndIf}
+
+	${NSD_CreateLabel} 0 0 100% 20u "This allows you to set the Java's Heap size limit. If you are not sure what this means, just leave it at 768. Click Install to continue."
+	Pop $Desc
 	
-	${NSD_CreateLabel} 0 0 50% 12u "Enter amount of memory to give to UMS"
+	${NSD_CreateLabel} 2% 50% 37% 12u "Maximum memory in megabytes"
 	Pop $Label
 
-	${NSD_CreateText} 50% 0 50% 12u "768"
+	${NSD_CreateText} 3% 60% 10% 12u "768"
 	Pop $Text
 
 	nsDialogs::Show
@@ -126,7 +131,7 @@ Section "Program Files"
 
   ReadENVStr $R0 ALLUSERSPROFILE
   SetOutPath "$R0\UMS"
-  AccessControl::GrantOnFile "$R0\PMS" "(S-1-5-32-545)" "FullAccess"
+  AccessControl::GrantOnFile "$R0\UMS" "(S-1-5-32-545)" "FullAccess"
 SectionEnd
 
 Section "Start Menu Shortcuts"
