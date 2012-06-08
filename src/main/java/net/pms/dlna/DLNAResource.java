@@ -741,12 +741,6 @@ public abstract class DLNAResource extends HTTPResource implements Cloneable, Ru
 	final protected void discoverWithRenderer(RendererConfiguration renderer, int count, boolean forced) {
 		// Discovering if not already done.
 		if (!isDiscovered()) {
-			if(depthLimit()) {
-				if(renderer.isPS3()||renderer.isXBOX())
-					LOGGER.info("Depth limit potentionally hit for "+getDisplayName());
-				if(defaultRenderer!=null)
-					defaultRenderer.addFolderLimit(this);
-			}
 			discoverChildren();
 			boolean ready = true;
 			if (renderer.isMediaParserV2() && renderer.isDLNATreeHack()) {
@@ -2112,18 +2106,6 @@ public abstract class DLNAResource extends HTTPResource implements Cloneable, Ru
 	 */
 	protected void setLastRefreshTime(long lastRefreshTime) {
 		this.lastRefreshTime = lastRefreshTime;
-	}
-	
-	private static final int DEPTH_WARNING_LIMIT=7;
-	
-	private boolean depthLimit() {
-		DLNAResource tmp=this;
-		int depth=0;
-		while(tmp!=null) {
-			tmp=tmp.getParent();
-			depth++;
-		}
-		return (depth>DEPTH_WARNING_LIMIT);
 	}
 }
 

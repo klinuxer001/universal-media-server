@@ -42,6 +42,8 @@ import net.pms.util.PropertiesUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.sun.jna.Platform;
+
 /**
  * Base implementation for the SystemUtils class for the generic cases.
  * @author zsombor
@@ -141,7 +143,7 @@ public class BasicSystemUtils implements SystemUtils {
 		if (SystemTray.isSupported()) {
 			SystemTray tray = SystemTray.getSystemTray();
 
-			Image image = Toolkit.getDefaultToolkit().getImage(frame.getClass().getResource("/resources/images/icon-16.png"));
+			Image trayIconImage = resolveTrayIcon(frame);
 
 			PopupMenu popup = new PopupMenu();
 			MenuItem defaultItem = new MenuItem(Messages.getString("LooksFrame.5"));
@@ -162,7 +164,7 @@ public class BasicSystemUtils implements SystemUtils {
 			popup.add(traceItem);
 			popup.add(defaultItem);
 
-			final TrayIcon trayIcon = new TrayIcon(image, PropertiesUtil.getProjectProperties().get("project.name"), popup);
+			final TrayIcon trayIcon = new TrayIcon(trayIconImage, PropertiesUtil.getProjectProperties().get("project.name"), popup);
 
 			trayIcon.setImageAutoSize(true);
 			trayIcon.addActionListener(new ActionListener() {
@@ -205,5 +207,15 @@ public class BasicSystemUtils implements SystemUtils {
 	@Override
 	public String[] getPingCommand(String hostAddress, int count, int packetSize) {
 		return new String[] { "ping", /* count */ "-c" , Integer.toString(count), /* size */ "-s", Integer.toString(packetSize), hostAddress };
+	}
+
+	private Image resolveTrayIcon(final LooksFrame frame) {
+		String icon = "icon-16.png";
+
+		if (Platform.isMac()) {
+			icon = "icon-22.png";
+		}
+
+		return Toolkit.getDefaultToolkit().getImage(frame.getClass().getResource("/resources/images/" + icon));
 	}
 }

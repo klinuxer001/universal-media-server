@@ -1140,13 +1140,10 @@
 										<mkdir dir="${project.binaries}/osx" />
 
 										<!-- MediaInfo library needs to be in the standard library path to be found -->
-										<copy file="${project.binaries}/libmediainfo.dylib" todir="${project.basedir}" />
+										<copy file="${project.binaries}/osx/libmediainfo.dylib" todir="${project.basedir}" />
 
 										<!-- Make all downloaded binaries executable -->
 										<chmod dir="${project.binaries}/osx" perm="a+x" includes="*" />
-
-										<copy file="${project.external-resources}/osx/pms.icns"
-											todir="${project.binaries}" overwrite="true" />
 									</target>
 								</configuration>
 							</execution>
@@ -1230,7 +1227,7 @@
 									<zipFile>${project.build.directory}/${project.build.finalName}-app.zip</zipFile>
 									<javaApplicationStub>/System/Library/Frameworks/JavaVM.framework/Versions/Current/Resources/MacOS/JavaApplicationStub</javaApplicationStub>
 									<bundleName>${project.name}</bundleName>
-									<iconFile>${project.basedir}/target/bin/pms.icns</iconFile>
+									<iconFile>${project.basedir}/src/main/resources/images/logo.icns</iconFile>
 									<version>${project.version}</version>
 									<jvmVersion>1.6+</jvmVersion>
 									<!-- Options to the JVM, will be used as the value of VMOptions in Info.plist. -->

@@ -67,7 +67,7 @@ public class UriRetriever {
 	}
 
 	private void configureMethod(HttpMethod method) {
-		method.setRequestHeader("User-Agent", "PMS");
+		method.setRequestHeader("User-Agent", "UMS");
 		method.setFollowRedirects(true);
 	}
 

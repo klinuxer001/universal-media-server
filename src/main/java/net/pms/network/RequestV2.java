@@ -67,7 +67,7 @@ public class RequestV2 extends HTTPResource {
 	 * separated by slashes. For example: "get/0$0$2$17/big_buck_bunny_1080p_h264.mov" or
 	 * "get/0$0$2$13/thumbnail0000Sintel.2010.1080p.mkv"
 	 */
-	private final String argument;
+	private String argument;
 	private String soapaction;
 	private String content;
 	private String objectID;
@@ -248,6 +248,12 @@ public class RequestV2 extends HTTPResource {
 		StringBuilder response = new StringBuilder();
 		DLNAResource dlna = null;
 		boolean xbox = mediaRenderer.isXBOX();
+
+		// Samsung 2012 TVs have a problematic preceding slash that needs to be removed.
+		if (argument.startsWith("/")) {
+			LOGGER.trace("Stripping preceding slash from: " + argument);
+			argument = argument.substring(1);
+		}
 
 		if ((method.equals("GET") || method.equals("HEAD")) && argument.startsWith("console/")) {
 			// Request to output a page to the HTLM console.
@@ -453,7 +459,7 @@ public class RequestV2 extends HTTPResource {
 					s = s.replace("[port]", "" + PMS.get().getServer().getPort());
 				}
 				if (xbox) {
-					LOGGER.debug("DLNA changes for Xbox360");
+					LOGGER.debug("DLNA changes for Xbox 360");
 					s = s.replace("Universal Media Server", "Universal Media Server [" + profileName + "] : Windows Media Connect");
 					s = s.replace("<modelName>UMS</modelName>", "<modelName>Windows Media Connect</modelName>");
 					s = s.replace("<serviceList>", "<serviceList>" + CRLF + "<service>" + CRLF
@@ -493,7 +499,7 @@ public class RequestV2 extends HTTPResource {
 			response.append(CRLF);
 			response.append(HTTPXMLHelper.SOAP_ENCODING_FOOTER);
 			response.append(CRLF);
-		} else if (method.equals("POST") && argument.equals("upnp/control/connection_manager")) {
+		} else if (method.equals("POST") && argument.endsWith("upnp/control/connection_manager")) {
 			output.setHeader(HttpHeaders.Names.CONTENT_TYPE, "text/xml; charset=\"utf-8\"");
 			if (soapaction.indexOf("ConnectionManager:1#GetProtocolInfo") > -1) {
 				response.append(HTTPXMLHelper.XML_HEADER);
@@ -505,7 +511,7 @@ public class RequestV2 extends HTTPResource {
 				response.append(HTTPXMLHelper.SOAP_ENCODING_FOOTER);
 				response.append(CRLF);
 			}
-		} else if (method.equals("POST") && argument.equals("upnp/control/content_directory")) {
+		} else if (method.equals("POST") && argument.endsWith("upnp/control/content_directory")) {
 			output.setHeader(HttpHeaders.Names.CONTENT_TYPE, "text/xml; charset=\"utf-8\"");
 			if (soapaction.indexOf("ContentDirectory:1#GetSystemUpdateID") > -1) {
 				response.append(HTTPXMLHelper.XML_HEADER);
@@ -517,6 +523,15 @@ public class RequestV2 extends HTTPResource {
 				response.append("<Id>" + DLNAResource.getSystemUpdateId() + "</Id>");
 				response.append(CRLF);
 				response.append(HTTPXMLHelper.GETSYSTEMUPDATEID_FOOTER);
+				response.append(CRLF);
+				response.append(HTTPXMLHelper.SOAP_ENCODING_FOOTER);
+				response.append(CRLF);
+			} else if (soapaction.indexOf("ContentDirectory:1#X_GetFeatureList") > -1) { // Added for Samsung 2012 TVs
+				response.append(HTTPXMLHelper.XML_HEADER);
+				response.append(CRLF);
+				response.append(HTTPXMLHelper.SOAP_ENCODING_HEADER);
+				response.append(CRLF);
+				response.append(HTTPXMLHelper.SAMSUNG_ERROR_RESPONSE);
 				response.append(CRLF);
 				response.append(HTTPXMLHelper.SOAP_ENCODING_FOOTER);
 				response.append(CRLF);

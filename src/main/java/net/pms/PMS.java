@@ -789,7 +789,7 @@ public class PMS {
 			sb.append(System.getProperty("os.arch").replace(" ", "_"));
 			sb.append("-");
 			sb.append(System.getProperty("os.version").replace(" ", "_"));
-			sb.append(", UPnP/1.0, PMS/" + getVersion());
+			sb.append(", UPnP/1.0, UMS/" + getVersion());
 			serverName = sb.toString();
 		}
 		return serverName;
@@ -1021,11 +1021,12 @@ public class PMS {
 	 * warnings where appropriate.
 	 */
 	private void logSystemInfo() {
+		long memoryInMB = Runtime.getRuntime().maxMemory() / 1048576;
+
 		LOGGER.info("Java: " + System.getProperty("java.version") + "-" + System.getProperty("java.vendor"));
-		LOGGER.info("OS: " + System.getProperty("os.name") + " " + System.getProperty("os.arch") + " "
-				+ System.getProperty("os.version"));
+		LOGGER.info("OS: " + System.getProperty("os.name") + " " + System.getProperty("os.arch") + " " + System.getProperty("os.version"));
 		LOGGER.info("Encoding: " + System.getProperty("file.encoding"));
-		LOGGER.info("Memory: "+Runtime.getRuntime().maxMemory());
+		LOGGER.info("Memory: " + memoryInMB + " " + Messages.getString("StatusTab.12"));
 		LOGGER.info("");
 
 		if (Platform.isMac()) {
