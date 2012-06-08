@@ -459,7 +459,7 @@ public class RequestV2 extends HTTPResource {
 					s = s.replace("[port]", "" + PMS.get().getServer().getPort());
 				}
 				if (xbox) {
-					LOGGER.debug("DLNA changes for Xbox360");
+					LOGGER.debug("DLNA changes for Xbox 360");
 					s = s.replace("Universal Media Server", "Universal Media Server [" + profileName + "] : Windows Media Connect");
 					s = s.replace("<modelName>UMS</modelName>", "<modelName>Windows Media Connect</modelName>");
 					s = s.replace("<serviceList>", "<serviceList>" + CRLF + "<service>" + CRLF
