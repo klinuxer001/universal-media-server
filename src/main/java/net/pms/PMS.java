@@ -789,7 +789,7 @@ public class PMS {
 			sb.append(System.getProperty("os.arch").replace(" ", "_"));
 			sb.append("-");
 			sb.append(System.getProperty("os.version").replace(" ", "_"));
-			sb.append(", UPnP/1.0, PMS/" + getVersion());
+			sb.append(", UPnP/1.0, UMS/" + getVersion());
 			serverName = sb.toString();
 		}
 		return serverName;
