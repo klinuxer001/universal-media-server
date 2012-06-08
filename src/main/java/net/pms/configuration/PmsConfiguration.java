@@ -276,8 +276,8 @@ public class PmsConfiguration {
 	private static final String ENV_PROFILE_PATH = "PMS_PROFILE";
 	private static final String PROFILE_DIRECTORY; // path to directory containing PMS config files
 	private static final String PROFILE_PATH; // abs path to profile file e.g. /path/to/UMS.conf
-    private static final String SKEL_PROFILE_PATH ; // abs path to skel (default) profile file e.g. /etc/skel/.config/ps3mediaserver/UMS.conf
-                                                    // "project.skelprofile.dir" project property
+	private static final String SKEL_PROFILE_PATH ; // abs path to skel (default) profile file e.g. /etc/skel/.config/ps3mediaserver/UMS.conf
+	                                                // "project.skelprofile.dir" project property
 	private static final String PROPERTY_PROFILE_PATH = "pms.profile.path";
 
 	static {
