@@ -2261,6 +2261,6 @@ public class PmsConfiguration {
 	}
 	
 	public boolean getFolderLimit() {
-		return getBoolean(KEY_FOLDER_LIMIT,true);
+		return getBoolean(KEY_FOLDER_LIMIT,false);
 	}
 }
