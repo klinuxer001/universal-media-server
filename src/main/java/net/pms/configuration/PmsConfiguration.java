@@ -234,7 +234,7 @@ public class PmsConfiguration {
 	);
 
 	/*
-		The following code enables a single setting - PMS_PROFILE - to be used to
+		The following code enables a single setting - UMS_PROFILE - to be used to
 		initialize PROFILE_PATH i.e. the path to the current session's profile (AKA UMS.conf).
 		It also initializes PROFILE_DIRECTORY - i.e. the directory the profile is located in -
 		which is needed for configuration-by-convention detection of WEB.conf (anything else?).
@@ -242,48 +242,48 @@ public class PmsConfiguration {
 		While this convention - and therefore PROFILE_DIRECTORY - will remain,
 		adding more configurables - e.g. web_conf = ... - is on the TODO list.
 
-		PMS_PROFILE is read (in this order) from the property pms.profile.path or the
-		environment variable PMS_PROFILE. If PMS is launched with the command-line option
+		UMS_PROFILE is read (in this order) from the property ums.profile.path or the
+		environment variable UMS_PROFILE. If UMS is launched with the command-line option
 		"profiles" (e.g. from a shortcut), it displays a file chooser dialog that
-		allows the pms.profile.path property to be set. This makes it easy to run PMS
+		allows the ums.profile.path property to be set. This makes it easy to run UMS
 		under multiple profiles without fiddling with environment variables, properties or
 		command-line arguments.
 
-		1) if PMS_PROFILE is not set, UMS.conf is located in: 
+		1) if UMS_PROFILE is not set, UMS.conf is located in: 
 
 			Windows:             %ALLUSERSPROFILE%\$build
 			Mac OS X:            $HOME/Library/Application Support/$build
 			Everything else:     $HOME/.config/$build
 
-		- where $build is a subdirectory that ensures incompatible PMS builds don't target/clobber
-		the same configuration files. The default value for $build is "PMS". Other builds might use e.g.
-		"PMS Rendr Edition" or "pms-mlx".
+		- where $build is a subdirectory that ensures incompatible UMS builds don't target/clobber
+		the same configuration files. The default value for $build is "UMS". Other builds might use e.g.
+		"UMS Rendr Edition" or "ums-mlx".
 
 		2) if a relative or absolute *directory path* is supplied (the directory must exist),
 		it is used as the profile directory and the profile is located there under the default profile name (UMS.conf):
 
-			PMS_PROFILE = /absolute/path/to/dir
-			PMS_PROFILE = relative/path/to/dir # relative to the working directory
+			UMS_PROFILE = /absolute/path/to/dir
+			UMS_PROFILE = relative/path/to/dir # relative to the working directory
 
 		Amongst other things, this can be used to restore the legacy behaviour of locating UMS.conf in the current
 		working directory e.g.:
 
-			PMS_PROFILE=. ./UMS.sh
+			UMS_PROFILE=. ./UMS.sh
 
 		3) if a relative or absolute *file path* is supplied (the file doesn't have to exist),
 		it is taken to be the profile, and its parent dir is taken to be the profile (i.e. config file) dir: 
 
-			PMS_PROFILE = UMS.conf            # profile dir = .
-			PMS_PROFILE = folder/dev.conf     # profile dir = folder
-			PMS_PROFILE = /path/to/some.file  # profile dir = /path/to/
+			UMS_PROFILE = UMS.conf            # profile dir = .
+			UMS_PROFILE = folder/dev.conf     # profile dir = folder
+			UMS_PROFILE = /path/to/some.file  # profile dir = /path/to/
 	 */
 	private static final String DEFAULT_PROFILE_FILENAME = "UMS.conf";
-	private static final String ENV_PROFILE_PATH = "PMS_PROFILE";
-	private static final String PROFILE_DIRECTORY; // path to directory containing PMS config files
+	private static final String ENV_PROFILE_PATH = "UMS_PROFILE";
+	private static final String PROFILE_DIRECTORY; // path to directory containing UMS config files
 	private static final String PROFILE_PATH; // abs path to profile file e.g. /path/to/UMS.conf
-	private static final String SKEL_PROFILE_PATH ; // abs path to skel (default) profile file e.g. /etc/skel/.config/ps3mediaserver/UMS.conf
+	private static final String SKEL_PROFILE_PATH ; // abs path to skel (default) profile file e.g. /etc/skel/.config/universalmediaserver/UMS.conf
 	                                                // "project.skelprofile.dir" project property
-	private static final String PROPERTY_PROFILE_PATH = "pms.profile.path";
+	private static final String PROPERTY_PROFILE_PATH = "ums.profile.path";
 
 	static {
         // first try the system property, typically set via the profile chooser

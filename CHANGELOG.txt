@@ -1,20 +1,41 @@
-﻿1.1.0 - 2012-06-??
+﻿1.1.0 - 2012-06-09
 
-	Made program restarts more reliable
-	Language updates and fixes
-	Fixed bug that occurred when resetting cache
-	Made buffer display in megabytes instead of bytes
-	Updated MediaInfo to 0.7.58
-	Renderer updates:
-		- Added Yamaha RX-V671 (thanks, adresd!)
-		- Added LG Smart TV Upgrader (600ST)
-		- Improved D-Link DSM-510 image
-		- Improved Sony Blu-ray Player image
-		- Numerous small improvements
+	General:
+		Made program restarts more reliable
+		Fixed bug that occurred when resetting cache
+		Made buffer display in megabytes instead of bytes
+		Updated MediaInfo to 0.7.58
+		Branding
+		Fixed overscan compensation bug on some renderers (thanks to tMH for reporting the bug!)
+		Improved OS X tray icon (thanks, glebb!)
+		Added workaround for folder depth limits
+		Use UMS_PROFILE instead of PMS_PROFILE
+		Added support for audio that is 48Hz/24Hz
+		Fixed settings folder permissions
+	Renderers:
+		Added Yamaha RX-V671 (thanks, adresd!)
+		Added LG Smart TV Upgrader (600ST)
+		Added OPPO BDP-83 (thanks, counsil!)
+		Added OPPO BDP-93 (thanks, counsil!)
+		Added Sony Bravia 5500 series image
+		Added Sony Bravia EX series image
+		Added Panasonic TV image
+		Improved D-Link DSM-510 image
+		Improved Sony Blu-ray Player image
+		Improved Xbox 360 image
+		Improved Philips Streamium support
+		Fixed support for Samsung 2012 TVs (thanks, trooperryan!)
+		Numerous small improvements
 	AviSynth True Motion (InterFrame):
-		- Supports more video cards
-		- Improved stability
-		- Improved compatibility with AviSynth 2.6
+		Supports more video cards
+		Improved stability
+		Improved compatibility with AviSynth 2.6
+	Languages:
+		Made Status tab more consistent across languages
+		Removed outdated translations
+	Installer:
+		Option to install AviSynth 2.6 MT
+		Option to set custom memory limit
 
 1.0.1 - 2012-06-03
 
