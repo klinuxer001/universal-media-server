@@ -5,9 +5,20 @@
 	Fixed bug that occurred when resetting cache
 	Made buffer display in megabytes instead of bytes
 	Updated MediaInfo to 0.7.58
+	More branding
+	Fixed overscan compensation bug on some renderers (thanks to tMH for reporting the bug!)
+	Improved OS X tray icon (thanks, glebb!)
+	Added workaround for folder depth limits
+	Use UMS_PROFILE instead of PMS_PROFILE
+	Added support for audio that is 48Hz/24Hz
+	Installer improvements:
+		- Option to install AviSynth 2.6 MT
+		- Option to set custom memory limit
 	Renderer updates:
 		- Added Yamaha RX-V671 (thanks, adresd!)
 		- Added LG Smart TV Upgrader (600ST)
+		- Added Sony Bravia 5500 series image
+		- Added Sony Bravia EX series image
 		- Improved D-Link DSM-510 image
 		- Improved Sony Blu-ray Player image
 		- Numerous small improvements
