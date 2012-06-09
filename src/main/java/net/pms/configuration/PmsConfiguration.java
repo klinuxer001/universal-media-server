@@ -179,6 +179,7 @@ public class PmsConfiguration {
 	private static final String KEY_UUID = "uuid";
 	private static final String KEY_VIDEOTRANSCODE_START_DELAY = "key_videotranscode_start_delay";
 	private static final String KEY_VIRTUAL_FOLDERS = "vfolders";
+	private static final String KEY_BUFFER_MAX = "buffer_max";
 
 	// the name of the subdirectory under which PMS config files are stored for this build (default: PMS).
 	// see Build for more details
@@ -189,7 +190,10 @@ public class PmsConfiguration {
 
 	private static String DEFAULT_AVI_SYNTH_SCRIPT;
 	private static final String BUFFER_TYPE_FILE = "file";
-	private static final int MAX_MAX_MEMORY_BUFFER_SIZE = 700;
+	//private static final int MAX_MAX_MEMORY_BUFFER_SIZE = 700;
+	private static final int MAX_MAX_MEMORY_DEFAULT_SIZE= 400;
+	private static final int BUFFER_MEMORY_FACTOR= 368;
+	private static int MAX_MAX_MEMORY_BUFFER_SIZE = MAX_MAX_MEMORY_DEFAULT_SIZE;
 	private static final char LIST_SEPARATOR = ',';
 	private static final String KEY_FOLDERS = "folders";
 	private final PropertiesConfiguration configuration;
@@ -403,6 +407,9 @@ public class PmsConfiguration {
 			Messages.getString("MEncoderAviSynth.8") +
 			Messages.getString("MEncoderAviSynth.10") +
 			Messages.getString("MEncoderAviSynth.11");
+		long usebleMemory = (Runtime.getRuntime().maxMemory() / 1048576)-BUFFER_MEMORY_FACTOR;
+		if(usebleMemory > MAX_MAX_MEMORY_DEFAULT_SIZE)
+			MAX_MAX_MEMORY_BUFFER_SIZE=(int)usebleMemory;
 	}
 
 	/**
@@ -2262,5 +2269,9 @@ public class PmsConfiguration {
 	
 	public boolean getFolderLimit() {
 		return getBoolean(KEY_FOLDER_LIMIT,false);
+	}
+	
+	public boolean initBufferMax() {
+		return getBoolean(KEY_BUFFER_MAX,false);
 	}
 }
