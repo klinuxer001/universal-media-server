@@ -87,6 +87,7 @@ public class PmsConfiguration {
 	private static final String KEY_FFMPEG_SETTINGS = "ffmpeg";
 	private static final String KEY_FIX_25FPS_AV_MISMATCH = "fix_25fps_av_mismatch";
 	private static final String KEY_FORCETRANSCODE = "forcetranscode";
+	private static final String KEY_FOLDER_LIMIT="folder_limit";
 	private static final String KEY_HIDE_EMPTY_FOLDERS = "hide_empty_folders";
 	private static final String KEY_HIDE_ENGINENAMES = "hide_enginenames";
 	private static final String KEY_HIDE_EXTENSIONS = "hide_extensions";
@@ -2257,5 +2258,9 @@ public class PmsConfiguration {
 
 	public void removeConfigurationListener(ConfigurationListener l) {
 		configuration.removeConfigurationListener(l);
+	}
+	
+	public boolean getFolderLimit() {
+		return getBoolean(KEY_FOLDER_LIMIT,false);
 	}
 }
