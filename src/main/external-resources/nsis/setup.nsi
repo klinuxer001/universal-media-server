@@ -47,8 +47,8 @@ ShowUninstDetails show
 Section -Prerequisites
   SetOutPath $INSTDIR\win32\avisynth
   MessageBox MB_YESNO "AviSynth 2.6 MT is recommended. Install it now?" /SD IDYES IDNO endAviSynthInstall
-    File "..\win32\avisynth\AviSynth2.6.0MT-2012.05.16.exe"
-    ExecWait "$INSTDIR\win32\avisynth\AviSynth2.6.0MT-2012.05.16.exe"
+    File "..\win32\avisynth\avisynth.exe"
+    ExecWait "$INSTDIR\win32\avisynth\avisynth.exe"
   endAviSynthInstall:
 SectionEnd
 
